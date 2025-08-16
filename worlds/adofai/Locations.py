@@ -15,7 +15,6 @@ adofai_locations = {
     "2-1": LocData(98765408, "World 2"),
     "2-2": LocData(98765409, "World 2"),
     "2-3": LocData(98765410, "World 2"),
-    "2-4": LocData(98765411, "World 2"),
     "2-X": LocData(98765412, "World 2"),
     "3-1": LocData(98765413, "World 3"),
     "3-2": LocData(98765414, "World 3"),

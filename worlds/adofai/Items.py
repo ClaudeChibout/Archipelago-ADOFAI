@@ -8,7 +8,6 @@ adofai_items = {
     "Key_Level_2-1": ItemData(54125400, "progression"),
     "Key_Level_2-2": ItemData(54125401, "progression"),
     "Key_Level_2-3": ItemData(54125402, "progression"),
-    "Key_Level_2-4": ItemData(54125403, "progression"),
     "Key_Level_2-X": ItemData(54125404, "progression"),
     "Key_Level_3-1": ItemData(54125405, "progression"),
     "Key_Level_3-2": ItemData(54125406, "progression"),

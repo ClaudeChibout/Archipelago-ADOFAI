@@ -364,6 +364,7 @@ class World(metaclass=AutoWorldRegister):
         Run before any general steps of the MultiWorld other than options. Useful for getting and adjusting option
         results and determining layouts for entrance rando etc. start inventory gets pushed after this step.
         """
+        
         pass
 
     def create_regions(self) -> None:

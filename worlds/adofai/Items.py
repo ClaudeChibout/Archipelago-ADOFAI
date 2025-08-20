@@ -5,39 +5,57 @@ class ItemData(NamedTuple):
     classification: str
 
 adofai_items = {
+    
+}
+
+MainWorldsKeys = {
+    "Key_Level_2-X": ItemData(54125404, "progression"),
+    "Key_Level_3-X": ItemData(54125411, "progression"),
+    "Key_Level_4-X": ItemData(54125417, "progression"),
+    "Key_Level_5-X": ItemData(54125422, "progression"),
+    "Key_Level_6-X": ItemData(54125427, "progression"),
+    "Key_Level_7-X": ItemData(54125433, "progression"),
+    "Key_Level_8-X": ItemData(54125442, "progression"),
+    "Key_Level_9-X": ItemData(54125448, "progression"),
+    "Key_Level_10-X": ItemData(54125457, "progression"),
+    "Key_Level_11-X": ItemData(54125464, "progression"),
+    "Key_Level_12-X": ItemData(54125471, "progression"),
+}
+
+MainWorldsTutoKeys = {
     "Key_Level_2-1": ItemData(54125400, "progression"),
     "Key_Level_2-2": ItemData(54125401, "progression"),
     "Key_Level_2-3": ItemData(54125402, "progression"),
-    "Key_Level_2-X": ItemData(54125404, "progression"),
+
     "Key_Level_3-1": ItemData(54125405, "progression"),
     "Key_Level_3-2": ItemData(54125406, "progression"),
     "Key_Level_3-3": ItemData(54125407, "progression"),
     "Key_Level_3-4": ItemData(54125408, "progression"),
     "Key_Level_3-5": ItemData(54125409, "progression"),
     "Key_Level_3-6": ItemData(54125410, "progression"),
-    "Key_Level_3-X": ItemData(54125411, "progression"),
+
     "Key_Level_4-1": ItemData(54125412, "progression"),
     "Key_Level_4-2": ItemData(54125413, "progression"),
     "Key_Level_4-3": ItemData(54125414, "progression"),
     "Key_Level_4-4": ItemData(54125415, "progression"),
     "Key_Level_4-5": ItemData(54125416, "progression"),
-    "Key_Level_4-X": ItemData(54125417, "progression"),
+
     "Key_Level_5-1": ItemData(54125418, "progression"),
     "Key_Level_5-2": ItemData(54125419, "progression"),
     "Key_Level_5-3": ItemData(54125420, "progression"),
     "Key_Level_5-4": ItemData(54125421, "progression"),
-    "Key_Level_5-X": ItemData(54125422, "progression"),
+
     "Key_Level_6-1": ItemData(54125423, "progression"),
     "Key_Level_6-2": ItemData(54125424, "progression"),
     "Key_Level_6-3": ItemData(54125425, "progression"),
     "Key_Level_6-4": ItemData(54125426, "progression"),
-    "Key_Level_6-X": ItemData(54125427, "progression"),
+
     "Key_Level_7-1": ItemData(54125428, "progression"),
     "Key_Level_7-2": ItemData(54125429, "progression"),
     "Key_Level_7-3": ItemData(54125430, "progression"),
     "Key_Level_7-4": ItemData(54125431, "progression"),
     "Key_Level_7-5": ItemData(54125432, "progression"),
-    "Key_Level_7-X": ItemData(54125433, "progression"),
+
     "Key_Level_8-1": ItemData(54125434, "progression"),
     "Key_Level_8-2": ItemData(54125435, "progression"),
     "Key_Level_8-3": ItemData(54125436, "progression"),
@@ -46,13 +64,13 @@ adofai_items = {
     "Key_Level_8-6": ItemData(54125439, "progression"),
     "Key_Level_8-7": ItemData(54125440, "progression"),
     "Key_Level_8-8": ItemData(54125441, "progression"),
-    "Key_Level_8-X": ItemData(54125442, "progression"),
+
     "Key_Level_9-1": ItemData(54125443, "progression"),
     "Key_Level_9-2": ItemData(54125444, "progression"),
     "Key_Level_9-3": ItemData(54125445, "progression"),
     "Key_Level_9-4": ItemData(54125446, "progression"),
     "Key_Level_9-5": ItemData(54125447, "progression"),
-    "Key_Level_9-X": ItemData(54125448, "progression"),
+
     "Key_Level_10-1": ItemData(54125449, "progression"),
     "Key_Level_10-2": ItemData(54125450, "progression"),
     "Key_Level_10-3": ItemData(54125451, "progression"),
@@ -61,20 +79,82 @@ adofai_items = {
     "Key_Level_10-6": ItemData(54125454, "progression"),
     "Key_Level_10-7": ItemData(54125455, "progression"),
     "Key_Level_10-8": ItemData(54125456, "progression"),
-    "Key_Level_10-X": ItemData(54125457, "progression"),
+
     "Key_Level_11-1": ItemData(54125458, "progression"),
     "Key_Level_11-2": ItemData(54125459, "progression"),
     "Key_Level_11-3": ItemData(54125460, "progression"),
     "Key_Level_11-4": ItemData(54125461, "progression"),
     "Key_Level_11-5": ItemData(54125462, "progression"),
     "Key_Level_11-6": ItemData(54125463, "progression"),
-    "Key_Level_11-X": ItemData(54125464, "progression"),
+
     "Key_Level_12-1": ItemData(54125465, "progression"),
     "Key_Level_12-2": ItemData(54125466, "progression"),
     "Key_Level_12-3": ItemData(54125467, "progression"),
     "Key_Level_12-4": ItemData(54125468, "progression"),
     "Key_Level_12-5": ItemData(54125469, "progression"),
     "Key_Level_12-6": ItemData(54125470, "progression"),
-    "Key_Level_12-X": ItemData(54125471, "progression"),
-    "Filler Note": ItemData(54125472, "filler"),
+}
+
+XtraWorldsKeys = {
+    "Key_Level_XS-X": ItemData(54125472, "progression"),
+    "Key_Level_PA-X": ItemData(54125473, "progression"),
+    "Key_Level_XH-X": ItemData(54125474, "progression"),
+    "Key_Level_XC-X": ItemData(54125475, "progression"),
+    "Key_Level_XF-X": ItemData(54125476, "progression"),
+    "Key_Level_XR-X": ItemData(54125477, "progression"),
+    "Key_Level_RJ-X": ItemData(54125478, "progression"),
+    "Key_Level_XN-X": ItemData(54125479, "progression"),
+    "Key_Level_XM-X": ItemData(54125480, "progression"),
+}
+
+XtraTutoKeys = {
+    "Key_Level_XS-1": ItemData(54125481, "progression"),
+    "Key_Level_XS-2": ItemData(54125482, "progression"),
+    "Key_Level_XS-3": ItemData(54125483, "progression"),
+    "Key_Level_XS-4": ItemData(54125484, "progression"),
+    "Key_Level_XS-5": ItemData(54125485, "progression"),
+    "Key_Level_XS-6": ItemData(54125486, "progression"),
+    "Key_Level_XS-7": ItemData(54125487, "progression"),
+    "Key_Level_XS-8": ItemData(54125488, "progression"),
+
+    "Key_Level_PA-1": ItemData(54125489, "progression"),
+
+    "Key_Level_XH-1": ItemData(54125490, "progression"),
+    "Key_Level_XH-2": ItemData(54125491, "progression"),
+    "Key_Level_XH-3": ItemData(54125492, "progression"),
+
+    "Key_Level_XC-1": ItemData(54125493, "progression"),
+    "Key_Level_XC-2": ItemData(54125494, "progression"),
+    "Key_Level_XC-3": ItemData(54125495, "progression"),
+    "Key_Level_XC-4": ItemData(54125496, "progression"),
+    "Key_Level_XC-5": ItemData(54125497, "progression"),
+
+    "Key_Level_XF-1": ItemData(54125498, "progression"),
+    "Key_Level_XF-2": ItemData(54125499, "progression"),
+    "Key_Level_XF-3": ItemData(54125500, "progression"),
+
+    "Key_Level_XR-1": ItemData(54125501, "progression"),
+    "Key_Level_XR-2": ItemData(54125502, "progression"),
+    "Key_Level_XR-3": ItemData(54125503, "progression"),
+
+    "Key_Level_RJ-1": ItemData(54125504, "progression"),
+    "Key_Level_RJ-2": ItemData(54125505, "progression"),
+    "Key_Level_RJ-3": ItemData(54125506, "progression"),
+    "Key_Level_RJ-4": ItemData(54125507, "progression"),
+    "Key_Level_RJ-5": ItemData(54125508, "progression"),
+    "Key_Level_RJ-6": ItemData(54125509, "progression"),
+    "Key_Level_RJ-7": ItemData(54125510, "progression"),
+
+    "Key_Level_XN-1": ItemData(54125511, "progression"),
+    "Key_Level_XN-2": ItemData(54125512, "progression"),
+    "Key_Level_XN-3": ItemData(54125513, "progression"),
+
+    "Key_Level_XM-1": ItemData(54125514, "progression"),
+    "Key_Level_XM-2": ItemData(54125515, "progression"),
+    "Key_Level_XM-3": ItemData(54125516, "progression"),
+    "Key_Level_XM-4": ItemData(54125517, "progression"),
+}
+
+OtherItems = {
+    "Filler Note": ItemData(54125518, "filler") 
 }

@@ -12,39 +12,64 @@ adofai_locations = {
     "1-5": LocData(98765405, "World 1"),
     "1-6": LocData(98765406, "World 1"),
     "1-X": LocData(98765407, "World 1"),
+}
+
+MainWorldsLoc = {
+    # "1-X": LocData(98765407, "World 1"),
+    "2-X": LocData(98765412, "World 2"),
+    "3-X": LocData(98765419, "World 3"),
+    "4-X": LocData(98765425, "World 4"),
+    "5-X": LocData(98765430, "World 5"),
+    "6-X": LocData(98765435, "World 6"),
+    "7-X": LocData(98765441, "World 7"),
+    "8-X": LocData(98765450, "World 8"),
+    "9-X": LocData(98765456, "World 9"),
+    "10-X": LocData(98765465, "World 10"),
+    "11-X": LocData(98765472, "World 11"),
+    "12-X": LocData(98765479, "World 12"),
+}
+
+MainWorldsTutoLoc = {
+    # "1-1": LocData(98765401, "World 1"),
+    # "1-2": LocData(98765402, "World 1"),
+    # "1-3": LocData(98765403, "World 1"),
+    # "1-4": LocData(98765404, "World 1"),
+    # "1-5": LocData(98765405, "World 1"),
+    # "1-6": LocData(98765406, "World 1"),
+
     "2-1": LocData(98765408, "World 2"),
     "2-2": LocData(98765409, "World 2"),
     "2-3": LocData(98765410, "World 2"),
-    "2-X": LocData(98765412, "World 2"),
+
     "3-1": LocData(98765413, "World 3"),
     "3-2": LocData(98765414, "World 3"),
     "3-3": LocData(98765415, "World 3"),
     "3-4": LocData(98765416, "World 3"),
     "3-5": LocData(98765417, "World 3"),
     "3-6": LocData(98765418, "World 3"),
-    "3-X": LocData(98765419, "World 3"),
+
     "4-1": LocData(98765420, "World 4"),
     "4-2": LocData(98765421, "World 4"),
     "4-3": LocData(98765422, "World 4"),
     "4-4": LocData(98765423, "World 4"),
     "4-5": LocData(98765424, "World 4"),
-    "4-X": LocData(98765425, "World 4"),
+
     "5-1": LocData(98765426, "World 5"),
     "5-2": LocData(98765427, "World 5"),
     "5-3": LocData(98765428, "World 5"),
     "5-4": LocData(98765429, "World 5"),
-    "5-X": LocData(98765430, "World 5"),
+
     "6-1": LocData(98765431, "World 6"),
     "6-2": LocData(98765432, "World 6"),
     "6-3": LocData(98765433, "World 6"),
     "6-4": LocData(98765434, "World 6"),
-    "6-X": LocData(98765435, "World 6"),
+
     "7-1": LocData(98765436, "World 7"),
     "7-2": LocData(98765437, "World 7"),
     "7-3": LocData(98765438, "World 7"),
     "7-4": LocData(98765439, "World 7"),
     "7-5": LocData(98765440, "World 7"),
-    "7-X": LocData(98765441, "World 7"),
+
     "8-1": LocData(98765442, "World 8"),
     "8-2": LocData(98765443, "World 8"),
     "8-3": LocData(98765444, "World 8"),
@@ -53,13 +78,13 @@ adofai_locations = {
     "8-6": LocData(98765447, "World 8"),
     "8-7": LocData(98765448, "World 8"),
     "8-8": LocData(98765449, "World 8"),
-    "8-X": LocData(98765450, "World 8"),
+
     "9-1": LocData(98765451, "World 9"),
     "9-2": LocData(98765452, "World 9"),
     "9-3": LocData(98765453, "World 9"),
     "9-4": LocData(98765454, "World 9"),
     "9-5": LocData(98765455, "World 9"),
-    "9-X": LocData(98765456, "World 9"),
+
     "10-1": LocData(98765457, "World 10"),
     "10-2": LocData(98765458, "World 10"),
     "10-3": LocData(98765459, "World 10"),
@@ -68,19 +93,79 @@ adofai_locations = {
     "10-6": LocData(98765462, "World 10"),
     "10-7": LocData(98765463, "World 10"),
     "10-8": LocData(98765464, "World 10"),
-    "10-X": LocData(98765465, "World 10"),
+
     "11-1": LocData(98765466, "World 11"),
     "11-2": LocData(98765467, "World 11"),
     "11-3": LocData(98765468, "World 11"),
     "11-4": LocData(98765469, "World 11"),
     "11-5": LocData(98765470, "World 11"),
     "11-6": LocData(98765471, "World 11"),
-    "11-X": LocData(98765472, "World 11"),
+
     "12-1": LocData(98765473, "World 12"),
     "12-2": LocData(98765474, "World 12"),
     "12-3": LocData(98765475, "World 12"),
     "12-4": LocData(98765476, "World 12"),
     "12-5": LocData(98765477, "World 12"),
     "12-6": LocData(98765478, "World 12"),
-    "12-X": LocData(98765479, "World 12")
 }
+
+XtraWorldsLoc = {
+    "XS-X": LocData(98765485, "World XS"),
+    "PA-X": LocData(98765486, "World PA"),
+    "XH-X": LocData(98765487, "World XH"),
+    "XC-X": LocData(98765488, "World XC"),
+    "XF-X": LocData(98765489, "World XF"),
+    "XR-X": LocData(98765490, "World XR"),
+    "RJ-X": LocData(98765491, "World RJ"),
+    "XN-X": LocData(98765492, "World XN"),
+    "XM-X": LocData(98765493, "World XM"),
+}
+
+XtraTutoLoc = {
+    "XS-1": LocData(98765500, "World XS"),
+    "XS-2": LocData(98765501, "World XS"),
+    "XS-3": LocData(98765502, "World XS"),
+    "XS-4": LocData(98765503, "World XS"),
+    "XS-5": LocData(98765504, "World XS"),
+    "XS-6": LocData(98765505, "World XS"),
+    "XS-7": LocData(98765506, "World XS"),
+    "XS-8": LocData(98765507, "World XS"),
+
+    "PA-1": LocData(98765508, "World PA"),
+
+    "XH-1": LocData(98765509, "World XH"),
+    "XH-2": LocData(98765510, "World XH"),
+    "XH-3": LocData(98765511, "World XH"),
+
+    "XC-1": LocData(98765512, "World XC"),
+    "XC-2": LocData(98765513, "World XC"),
+    "XC-3": LocData(98765514, "World XC"),
+    "XC-4": LocData(98765515, "World XC"),
+    "XC-5": LocData(98765516, "World XC"),
+
+    "XF-1": LocData(98765517, "World XF"),
+    "XF-2": LocData(98765518, "World XF"),
+    "XF-3": LocData(98765519, "World XF"),
+
+    "XR-1": LocData(98765520, "World XR"),
+    "XR-2": LocData(98765521, "World XR"),
+    "XR-3": LocData(98765522, "World XR"),
+
+    "RJ-1": LocData(98765523, "World RJ"),
+    "RJ-2": LocData(98765524, "World RJ"),
+    "RJ-3": LocData(98765525, "World RJ"),
+    "RJ-4": LocData(98765526, "World RJ"),
+    "RJ-5": LocData(98765527, "World RJ"),
+    "RJ-6": LocData(98765528, "World RJ"),
+    "RJ-7": LocData(98765529, "World RJ"),
+
+    "XN-1": LocData(98765530, "World XN"),
+    "XN-2": LocData(98765531, "World XN"),
+    "XN-3": LocData(98765532, "World XN"),
+
+    "XM-1": LocData(98765533, "World XM"),
+    "XM-2": LocData(98765534, "World XM"),
+    "XM-3": LocData(98765535, "World XM"),
+    "XM-4": LocData(98765536, "World XM"),
+}
+

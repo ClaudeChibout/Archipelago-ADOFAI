@@ -91,12 +91,17 @@ class ADOFAIWorld(World):
 
         for item_name in used_items.keys():
             self.multiworld.itempool.append(make_item(item_name))
-
-        total_locations = len([loc for loc in self.multiworld.get_locations(self.player) if not getattr(loc, "event", False)])
-        while len(self.multiworld.itempool) < total_locations:
+        
+        total_locations = len([
+            loc for loc in self.multiworld.get_locations(self.player)
+            if not getattr(loc, "event", False)
+        ])
+        
+        while len([i for i in self.multiworld.itempool if i.player == self.player]) < total_locations:
             filler_name = self.get_filler_item_name()
-            filler_data = OtherItems.get(filler_name)
+            filler_data = OtherItems[filler_name]
             self.multiworld.itempool.append(Item(filler_name, ItemClassification.filler, filler_data.id, self.player))
+
 
     def set_rules(self) -> None:
         """Tout est ouvert par défaut; ajoute tes règles d'accès par région si besoin."""

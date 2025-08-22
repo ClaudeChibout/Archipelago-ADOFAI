@@ -2,6 +2,7 @@
 
 from worlds.AutoWorld import World
 from BaseClasses import  Item, Location, ItemClassification, Region
+from worlds.generic.Rules import add_rule
 
 # Import des données
 from .Items import adofai_items, MainWorldsKeys, MainWorldsTutoKeys, OtherItems, XtraWorldsKeys, XtraTutoKeys
@@ -62,7 +63,13 @@ class ADOFAIWorld(World):
 
         for loc_name, loc_data in used_locs.items():
             target = region_by_name.get(loc_data.world or "Menu")
-            target.locations.append(Location(self.player, loc_name, loc_data.id, target))
+            loc = Location(self.player, loc_name, loc_data.id, target)
+            target.locations.append(loc)
+            
+            # add the rules for locations
+            if loc_name not in adofai_locations.keys():
+                add_rule(loc, lambda state, ln=loc_name: state.has(f"Key_Level_{ln}", self.player))
+
 
     def create_items(self) -> None:
         """Construit l'itempool: progression + useful, puis filler jusqu'à couvrir toutes les locations.

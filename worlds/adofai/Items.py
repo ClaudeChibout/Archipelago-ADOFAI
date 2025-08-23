@@ -167,12 +167,6 @@ BWorldTutoKeys = {
     "Key_Level_B-1": ItemData(54125520, "progression"),
 }
 
-CrownWorldsKeys = {
-    "Key_Level_XO-X": ItemData(54125538, "progression"),
-    "Key_Level_XT-X": ItemData(54125539, "progression"),
-    "Key_Level_XI-X": ItemData(54125540, "progression"),
-}
-
 CrownWorldsTutoKeys = {
     "Key_Level_XO-1": ItemData(54125521, "progression"),
     "Key_Level_XO-2": ItemData(54125522, "progression"),
@@ -195,10 +189,10 @@ CrownWorldsTutoKeys = {
     "Key_Level_XI-7": ItemData(54125537, "progression"),
 }
 
-StarWorldsKeys = {
-    "Key_Level_MN-X": ItemData(54125555, "progression"),
-    "Key_Level_ML-X": ItemData(54125556, "progression"),
-    "Key_Level_MO-X": ItemData(54125557, "progression"),
+CrownWorldsKeys = {
+    "Key_Level_XO-X": ItemData(54125538, "progression"),
+    "Key_Level_XT-X": ItemData(54125539, "progression"),
+    "Key_Level_XI-X": ItemData(54125540, "progression"),
 }
 
 StarWorldsTutoKeys = {
@@ -218,6 +212,12 @@ StarWorldsTutoKeys = {
     "Key_Level_MO-1": ItemData(54125552, "progression"),
     "Key_Level_MO-2": ItemData(54125553, "progression"),
     "Key_Level_MO-3": ItemData(54125554, "progression"),
+}
+
+StarWorldsKeys = {
+    "Key_Level_MN-X": ItemData(54125555, "progression"),
+    "Key_Level_ML-X": ItemData(54125556, "progression"),
+    "Key_Level_MO-X": ItemData(54125557, "progression"),
 }
 
 

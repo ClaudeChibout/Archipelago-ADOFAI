@@ -220,4 +220,74 @@ StarWorldsKeys = {
     "Key_Level_MO-X": ItemData(54125557, "progression"),
 }
 
+NeonCosmosWorldsTutoKeys = {
+    "Key_Level_T1-1": ItemData(54125558, "progression"),
+    "Key_Level_T1-2": ItemData(54125559, "progression"),
+    "Key_Level_T1-3": ItemData(54125560, "progression"),
+    "Key_Level_T1-4": ItemData(54125561, "progression"),
+
+    "Key_Level_T2-1": ItemData(54125562, "progression"),
+    "Key_Level_T2-2": ItemData(54125563, "progression"),
+    "Key_Level_T2-3": ItemData(54125564, "progression"),
+    "Key_Level_T2-4": ItemData(54125565, "progression"),
+    "Key_Level_T2-5": ItemData(54125566, "progression"),
+    "Key_Level_T2-6": ItemData(54125567, "progression"),
+    "Key_Level_T2-7": ItemData(54125568, "progression"),
+    "Key_Level_T2-8": ItemData(54125569, "progression"),
+    "Key_Level_T2-9": ItemData(54125570, "progression"),
+
+    "Key_Level_T3-1": ItemData(54125571, "progression"),
+
+    "Key_Level_T4-1": ItemData(54125572, "progression"),
+    "Key_Level_T4-2": ItemData(54125573, "progression"),
+    "Key_Level_T4-3": ItemData(54125574, "progression"),
+    "Key_Level_T4-4": ItemData(54125575, "progression"),
+    "Key_Level_T4-5": ItemData(54125576, "progression"),
+    "Key_Level_T4-6": ItemData(54125577, "progression"),
+    "Key_Level_T4-7": ItemData(54125578, "progression"),
+    "Key_Level_T4-8": ItemData(54125579, "progression"),
+    "Key_Level_T4-9": ItemData(54125580, "progression"),
+    "Key_Level_T4-10": ItemData(54125581, "progression"),
+    "Key_Level_T4-11": ItemData(54125582, "progression"),
+    "Key_Level_T4-12": ItemData(54125583, "progression"),
+
+    "Key_Level_T5-1": ItemData(54125584, "progression"),
+    "Key_Level_T5-2": ItemData(54125585, "progression"),
+    "Key_Level_T5-3": ItemData(54125586, "progression"),
+    "Key_Level_T5-4": ItemData(54125587, "progression"),
+    "Key_Level_T5-5": ItemData(54125588, "progression"),
+}
+
+NeonCosmosWorldsKeys = {
+    "Key_Level_T1-X": ItemData(54125589, "progression"),
+    "Key_Level_T2-X": ItemData(54125590, "progression"),
+    "Key_Level_T3-X": ItemData(54125591, "progression"),
+    "Key_Level_T4-X": ItemData(54125592, "progression"),
+    "Key_Level_T5-X": ItemData(54125593, "progression"),
+}
+
+NeonCosmosWorldsEXTutoKeys = {
+    "Key_Level_T1EX-1": ItemData(54125594, "progression"),
+    "Key_Level_T1EX-2": ItemData(54125595, "progression"),
+    "Key_Level_T1EX-3": ItemData(54125596, "progression"),
+    "Key_Level_T1EX-4": ItemData(54125597, "progression"),
+
+    "Key_Level_T2EX-1": ItemData(54125598, "progression"),
+    "Key_Level_T2EX-2": ItemData(54125599, "progression"),
+    "Key_Level_T2EX-3": ItemData(54125600, "progression"),
+    "Key_Level_T2EX-4": ItemData(54125601, "progression"),
+
+    "Key_Level_T4EX-1": ItemData(54125602, "progression"),
+    "Key_Level_T4EX-2": ItemData(54125603, "progression"),
+    "Key_Level_T4EX-3": ItemData(54125604, "progression"),
+    "Key_Level_T4EX-4": ItemData(54125605, "progression"),
+}
+
+NeonCosmosWorldsEXKeys = {
+    "Key_Level_T1EX-X": ItemData(54125606, "progression"),
+    "Key_Level_T2EX-X": ItemData(54125607, "progression"),
+    "Key_Level_T4EX-X": ItemData(54125608, "progression"),
+    "Key_Level_T3EX-X": ItemData(54125609, "progression"),
+}
+
 

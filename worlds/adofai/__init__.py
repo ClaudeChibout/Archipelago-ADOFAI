@@ -7,19 +7,23 @@ from worlds.generic.Rules import add_rule
 # Import des données
 from .Items import adofai_items, MainWorldsKeys, MainWorldsTutoKeys, OtherItems, XtraWorldsKeys, XtraTutoKeys
 from .Items import BWorldKeys, BWorldTutoKeys, CrownWorldsKeys, CrownWorldsTutoKeys, StarWorldsKeys, StarWorldsTutoKeys
+from .Items import NeonCosmosWorldsKeys, NeonCosmosWorldsTutoKeys, NeonCosmosWorldsEXKeys, NeonCosmosWorldsEXTutoKeys
 from .Locations import adofai_locations, MainWorldsLoc, MainWorldsTutoLoc, XtraWorldsLoc, XtraTutoLoc
 from .Locations import BWorldLoc, BWorldTutoLoc, CrownWorldsLoc, CrownWorldsTutoLoc, StarWorldsLoc, StarWorldsTutoLoc
+from .Locations import NeonCosmosWorldsLoc, NeonCosmosWorldsTutoLoc, NeonCosmosWorldsEXLoc, NeonCosmosWorldsEXTutoLoc
 from .Options import ADOFAIOptions
 
 
 all_items = adofai_items | MainWorldsKeys | MainWorldsTutoKeys | XtraTutoKeys | XtraWorldsKeys
 all_items = all_items | OtherItems | BWorldKeys | BWorldTutoKeys | CrownWorldsKeys | CrownWorldsTutoKeys
 all_items = all_items | StarWorldsKeys | StarWorldsTutoKeys
+all_items = all_items | NeonCosmosWorldsKeys | NeonCosmosWorldsTutoKeys | NeonCosmosWorldsEXKeys | NeonCosmosWorldsEXTutoKeys
 _item_name_to_id = {n: d.id for n, d in all_items.items()}
 
 all_locs = adofai_locations | MainWorldsLoc | MainWorldsTutoLoc | XtraTutoLoc | XtraWorldsLoc
 all_locs = all_locs | BWorldLoc | BWorldTutoLoc | CrownWorldsLoc | CrownWorldsTutoLoc
-all_locs = all_locs | StarWorldsLoc | StarWorldsTutoLoc
+all_locs = all_locs | StarWorldsLoc | StarWorldsTutoLoc 
+all_locs = all_locs | NeonCosmosWorldsLoc | NeonCosmosWorldsTutoLoc | NeonCosmosWorldsEXLoc | NeonCosmosWorldsEXTutoLoc
 _location_name_to_id = {n: d.id for n, d in all_locs.items()}
 
 
@@ -56,6 +60,14 @@ class ADOFAIWorld(World):
             used_locs.update(StarWorldsLoc)
         if self.options.star_worlds_tuto.value:
             used_locs.update(StarWorldsTutoLoc)
+        if self.options.neon_cosmos_worlds.value:
+            used_locs.update(NeonCosmosWorldsLoc)
+        if self.options.neon_cosmos_worlds_ex_tuto.value:
+            used_locs.update(NeonCosmosWorldsTutoLoc)
+        if self.options.neon_cosmos_worlds.value:
+            used_locs.update(NeonCosmosWorldsEXLoc)
+        if self.options.neon_cosmos_worlds_ex_tuto.value:
+            used_locs.update(NeonCosmosWorldsEXTutoLoc)
 
         # Création des régions et placement des locations filtrées
         menu = Region("Menu", self.player, self.multiworld)
@@ -114,6 +126,14 @@ class ADOFAIWorld(World):
             used_items.update(StarWorldsKeys)
         if self.options.star_worlds_tuto.value:
             used_items.update(StarWorldsTutoKeys)
+        if self.options.neon_cosmos_worlds.value:
+            used_items.update(NeonCosmosWorldsKeys)
+        if self.options.neon_cosmos_worlds_ex_tuto.value:
+            used_items.update(NeonCosmosWorldsTutoKeys)
+        if self.options.neon_cosmos_worlds.value:
+            used_items.update(NeonCosmosWorldsEXKeys)
+        if self.options.neon_cosmos_worlds_ex_tuto.value:
+            used_items.update(NeonCosmosWorldsEXTutoKeys)
 
         for item_name in used_items.keys():
             self.multiworld.itempool.append(make_item(item_name))
@@ -155,6 +175,10 @@ class ADOFAIWorld(World):
             "crown_worlds_tuto": bool(self.options.crown_worlds_tuto.value),
             "star_worlds": bool(self.options.star_worlds.value),
             "star_worlds_tuto": bool(self.options.star_worlds_tuto.value),
+            "neon_cosmos_worlds": bool(self.options.neon_cosmos_worlds.value),
+            "neon_cosmos_worlds_tuto": bool(self.options.neon_cosmos_worlds_tuto.value),
+            "neon_cosmos_worlds_ex": bool(self.options.neon_cosmos_worlds_ex.value),
+            "neon_cosmos_worlds_ex_tuto": bool(self.options.neon_cosmos_worlds_ex_tuto.value),
 
         }
 

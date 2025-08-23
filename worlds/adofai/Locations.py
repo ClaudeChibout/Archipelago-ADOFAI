@@ -231,4 +231,73 @@ StarWorldsLoc = {
     "MO-X": LocData(98765575, "World MO"),
 }
 
+NeonCosmosWorldsTutoLoc = {
+    "T1-1": LocData(98765576, "World T1"),
+    "T1-2": LocData(98765577, "World T1"),
+    "T1-3": LocData(98765578, "World T1"),
+    "T1-4": LocData(98765579, "World T1"),
+
+    "T2-1": LocData(98765580, "World T2"),
+    "T2-2": LocData(98765581, "World T2"),
+    "T2-3": LocData(98765582, "World T2"),
+    "T2-4": LocData(98765583, "World T2"),
+    "T2-5": LocData(98765584, "World T2"),
+    "T2-6": LocData(98765585, "World T2"),
+    "T2-7": LocData(98765586, "World T2"),
+    "T2-8": LocData(98765587, "World T2"),
+    "T2-9": LocData(98765588, "World T2"),
+
+    "T3-1": LocData(98765589, "World T3"),
+
+    "T4-1": LocData(98765590, "World T4"),
+    "T4-2": LocData(98765591, "World T4"),
+    "T4-3": LocData(98765592, "World T4"),
+    "T4-4": LocData(98765593, "World T4"),
+    "T4-5": LocData(98765594, "World T4"),
+    "T4-6": LocData(98765595, "World T4"),
+    "T4-7": LocData(98765596, "World T4"),
+    "T4-8": LocData(98765597, "World T4"),
+    "T4-9": LocData(98765598, "World T4"),
+    "T4-10": LocData(98765599, "World T4"),
+    "T4-11": LocData(98765600, "World T4"),
+    "T4-12": LocData(98765601, "World T4"),
+
+    "T5-1": LocData(98765602, "World T5"),
+    "T5-2": LocData(98765603, "World T5"),
+    "T5-3": LocData(98765604, "World T5"),
+    "T5-4": LocData(98765605, "World T5"),
+    "T5-5": LocData(98765606, "World T5"),
+}
+
+NeonCosmosWorldsLoc = {
+    "T1-X": LocData(98765607, "World T1"),
+    "T2-X": LocData(98765608, "World T2"),
+    "T3-X": LocData(98765609, "World T3"),
+    "T4-X": LocData(98765610, "World T4"),
+    "T5-X": LocData(98765611, "World T5"),
+}
+
+NeonCosmosWorldsEXTutoLoc = {
+    "T1EX-1": LocData(98765612, "World T1EX"),
+    "T1EX-2": LocData(98765613, "World T1EX"),
+    "T1EX-3": LocData(98765614, "World T1EX"),
+    "T1EX-4": LocData(98765615, "World T1EX"),
+
+    "T2EX-1": LocData(98765616, "World T2EX"),
+    "T2EX-2": LocData(98765617, "World T2EX"),
+    "T2EX-3": LocData(98765618, "World T2EX"),
+    "T2EX-4": LocData(98765619, "World T2EX"),
+
+    "T4EX-1": LocData(98765620, "World T4EX"),
+    "T4EX-2": LocData(98765621, "World T4EX"),
+    "T4EX-3": LocData(98765622, "World T4EX"),
+    "T4EX-4": LocData(98765623, "World T4EX"),
+}
+
+NeonCosmosWorldsEXLoc = {
+    "T1EX-X": LocData(98765624, "World T1EX"),
+    "T2EX-X": LocData(98765625, "World T2EX"),
+    "T4EX-X": LocData(98765626, "World T4EX"),
+    "T3EX-X": LocData(98765627, "World T3EX"),
+}
 

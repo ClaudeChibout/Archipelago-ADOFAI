@@ -30,6 +30,19 @@ class StarWorlds(Toggle):
 class StarWorldsTuto(Toggle):
     display_name= "StarWorldsTuto"
 
+class NeonCosmosWorlds(Toggle):
+    display_name= "NeonCosmosWorlds"
+
+class NeonCosmosWorldsTuto(Toggle):
+    display_name= "NeonCosmosWorldsTuto"
+
+class NeonCosmosWorldsEX(Toggle):
+    display_name= "NeonCosmosWorldsEX"
+
+class NeonCosmosWorldsEXTuto(Toggle):
+    display_name= "NeonCosmosWorldsEXTuto"
+
+
 @dataclass
 class ADOFAIOptions(PerGameCommonOptions):
     death_link: DeathLink
@@ -42,3 +55,7 @@ class ADOFAIOptions(PerGameCommonOptions):
     crown_worlds_tuto: CrownWorldsTuto
     star_worlds: StarWorlds
     star_worlds_tuto: StarWorldsTuto
+    neon_cosmos_worlds: NeonCosmosWorlds
+    neon_cosmos_worlds_tuto: NeonCosmosWorldsTuto
+    neon_cosmos_worlds_ex: NeonCosmosWorldsEX
+    neon_cosmos_worlds_ex_tuto: NeonCosmosWorldsEXTuto

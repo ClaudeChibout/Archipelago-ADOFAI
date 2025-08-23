@@ -18,6 +18,18 @@ class BWorld(Toggle):
 class BWorldTuto(Toggle):
     display_name = "BWorldTuto"
 
+class CrownWorlds(Toggle):
+    display_name= "CronwWorlds"
+
+class CrownWorldsTuto(Toggle):
+    display_name= "CronwWorldsTuto"
+
+class StarWorlds(Toggle):
+    display_name= "StarWorlds"
+
+class StarWorldsTuto(Toggle):
+    display_name= "StarWorldsTuto"
+
 @dataclass
 class ADOFAIOptions(PerGameCommonOptions):
     death_link: DeathLink
@@ -26,3 +38,7 @@ class ADOFAIOptions(PerGameCommonOptions):
     xtra_worlds_tuto: XtraWorldsTuto
     b_world: BWorld
     b_world_tuto: BWorldTuto
+    crown_worlds: CrownWorlds
+    crown_worlds_tuto: CrownWorldsTuto
+    star_worlds: StarWorlds
+    star_worlds_tuto: StarWorldsTuto

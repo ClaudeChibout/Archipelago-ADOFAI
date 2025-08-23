@@ -6,16 +6,20 @@ from worlds.generic.Rules import add_rule
 
 # Import des données
 from .Items import adofai_items, MainWorldsKeys, MainWorldsTutoKeys, OtherItems, XtraWorldsKeys, XtraTutoKeys
-from .Items import BWorldKeys, BWorldTutoKeys
+from .Items import BWorldKeys, BWorldTutoKeys, CrownWorldsKeys, CrownWorldsTutoKeys, StarWorldsKeys, StarWorldsTutoKeys
 from .Locations import adofai_locations, MainWorldsLoc, MainWorldsTutoLoc, XtraWorldsLoc, XtraTutoLoc
-from .Locations import BWorldLoc, BWorldTutoLoc
+from .Locations import BWorldLoc, BWorldTutoLoc, CrownWorldsLoc, CrownWorldsTutoLoc, StarWorldsLoc, StarWorldsTutoLoc
 from .Options import ADOFAIOptions
 
 
-all_items = adofai_items | MainWorldsKeys | MainWorldsTutoKeys | XtraTutoKeys | XtraWorldsKeys | OtherItems | BWorldKeys | BWorldTutoKeys
+all_items = adofai_items | MainWorldsKeys | MainWorldsTutoKeys | XtraTutoKeys | XtraWorldsKeys
+all_items = all_items | OtherItems | BWorldKeys | BWorldTutoKeys | CrownWorldsKeys | CrownWorldsTutoKeys
+all_items = all_items | StarWorldsKeys | StarWorldsTutoKeys
 _item_name_to_id = {n: d.id for n, d in all_items.items()}
 
-all_locs = adofai_locations | MainWorldsLoc | MainWorldsTutoLoc | XtraTutoLoc | XtraWorldsLoc | BWorldLoc | BWorldTutoLoc
+all_locs = adofai_locations | MainWorldsLoc | MainWorldsTutoLoc | XtraTutoLoc | XtraWorldsLoc
+all_locs = all_locs | BWorldLoc | BWorldTutoLoc | CrownWorldsLoc | CrownWorldsTutoLoc
+all_locs = all_locs | StarWorldsLoc | StarWorldsTutoLoc
 _location_name_to_id = {n: d.id for n, d in all_locs.items()}
 
 
@@ -28,17 +32,6 @@ class ADOFAIWorld(World):
     
     item_name_to_id: dict[str, int] = _item_name_to_id
     location_name_to_id: dict[str, int] = _location_name_to_id
-
-    def create_item_name_to_id(self) -> dict[str, int]:
-        # Mapping exhaustif pour DataPackage
-        all_items = adofai_items | MainWorldsKeys | MainWorldsTutoKeys | XtraTutoKeys | XtraWorldsKeys | OtherItems | BWorldKeys | BWorldTutoKeys
-        return {n: d.id for n, d in all_items.items()}
-
-    def create_location_name_to_id(self) -> dict[str, int]:
-        # Mapping exhaustif pour DataPackage
-        all_locs = adofai_locations | MainWorldsLoc | MainWorldsTutoLoc | XtraTutoLoc | XtraWorldsLoc | BWorldLoc | BWorldTutoLoc
-        return {n: d.id for n, d in all_locs.items()}
-
 
     def create_regions(self):
         # Filtre pool effectif selon options
@@ -55,6 +48,14 @@ class ADOFAIWorld(World):
             used_locs.update(BWorldLoc)
         if self.options.b_world_tuto.value:
             used_locs.update(BWorldTutoLoc)
+        if self.options.crown_worlds.value:
+            used_locs.update(CrownWorldsLoc)
+        if self.options.crown_worlds_tuto.value:
+            used_locs.update(CrownWorldsTutoLoc)
+        if self.options.star_worlds.value:
+            used_locs.update(StarWorldsLoc)
+        if self.options.star_worlds_tuto.value:
+            used_locs.update(StarWorldsTutoLoc)
 
         # Création des régions et placement des locations filtrées
         menu = Region("Menu", self.player, self.multiworld)
@@ -105,6 +106,14 @@ class ADOFAIWorld(World):
             used_items.update(BWorldKeys)
         if self.options.b_world_tuto.value:
             used_items.update(BWorldTutoKeys)
+        if self.options.crown_worlds.value:
+            used_items.update(CrownWorldsKeys)
+        if self.options.crown_worlds_tuto.value:
+            used_items.update(CrownWorldsTutoKeys)
+        if self.options.star_worlds.value:
+            used_items.update(StarWorldsKeys)
+        if self.options.star_worlds_tuto.value:
+            used_items.update(StarWorldsTutoKeys)
 
         for item_name in used_items.keys():
             self.multiworld.itempool.append(make_item(item_name))
@@ -142,6 +151,11 @@ class ADOFAIWorld(World):
             "xtra_worlds_tuto": bool(self.options.xtra_worlds_tuto.value),
             "b_world": bool(self.options.b_world.value),
             "b_world_tuto": bool(self.options.b_world_tuto.value),
+            "crown_worlds": bool(self.options.crown_worlds.value),
+            "crown_worlds_tuto": bool(self.options.crown_worlds_tuto.value),
+            "star_worlds": bool(self.options.star_worlds.value),
+            "star_worlds_tuto": bool(self.options.star_worlds_tuto.value),
+
         }
 
 

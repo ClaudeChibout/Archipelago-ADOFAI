@@ -178,3 +178,57 @@ BWorldTutoLoc = {
     "B-1": LocData(98765538, "World B"),
 }
 
+CrownWorldsTutoLoc = {
+    "XO-1": LocData(98765539, "World XO"),
+    "XO-2": LocData(98765540, "World XO"),
+
+    "XT-1": LocData(98765541, "World XT"),
+    "XT-2": LocData(98765542, "World XT"),
+    "XT-3": LocData(98765543, "World XT"),
+    "XT-4": LocData(98765544, "World XT"),
+    "XT-5": LocData(98765545, "World XT"),
+    "XT-6": LocData(98765546, "World XT"),
+    "XT-7": LocData(98765547, "World XT"),
+    "XT-8": LocData(98765548, "World XT"),
+
+    "XI-1": LocData(98765549, "World XI"),
+    "XI-2": LocData(98765550, "World XI"),
+    "XI-3": LocData(98765551, "World XI"),
+    "XI-4": LocData(98765552, "World XI"),
+    "XI-5": LocData(98765553, "World XI"),
+    "XI-6": LocData(98765554, "World XI"),
+    "XI-7": LocData(98765555, "World XI"),
+}
+
+CrownWorldsLoc = {
+    "XO-X": LocData(98765556, "World XO"),
+    "XT-X": LocData(98765557, "World XT"),
+    "XI-X": LocData(98765558, "World XI"),
+}
+
+StarWorldsTutoLoc = {
+    "MN-1": LocData(98765559, "World MN"),
+    "MN-2": LocData(98765560, "World MN"),
+    "MN-3": LocData(98765561, "World MN"),
+    "MN-4": LocData(98765562, "World MN"),
+
+    "ML-1": LocData(98765563, "World ML"),
+    "ML-2": LocData(98765564, "World ML"),
+    "ML-3": LocData(98765565, "World ML"),
+    "ML-4": LocData(98765566, "World ML"),
+    "ML-5": LocData(98765567, "World ML"),
+    "ML-6": LocData(98765568, "World ML"),
+    "ML-7": LocData(98765569, "World ML"),
+
+    "MO-1": LocData(98765570, "World MO"),
+    "MO-2": LocData(98765571, "World MO"),
+    "MO-3": LocData(98765572, "World MO"),
+}
+
+StarWorldsLoc = {
+    "MN-X": LocData(98765573, "World MN"),
+    "ML-X": LocData(98765574, "World ML"),
+    "MO-X": LocData(98765575, "World MO"),
+}
+
+

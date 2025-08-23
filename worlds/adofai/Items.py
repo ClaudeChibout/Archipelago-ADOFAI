@@ -167,3 +167,57 @@ BWorldTutoKeys = {
     "Key_Level_B-1": ItemData(54125520, "progression"),
 }
 
+CrownWorldsKeys = {
+    "Key_Level_XO-X": ItemData(54125538, "progression"),
+    "Key_Level_XT-X": ItemData(54125539, "progression"),
+    "Key_Level_XI-X": ItemData(54125540, "progression"),
+}
+
+CrownWorldsTutoKeys = {
+    "Key_Level_XO-1": ItemData(54125521, "progression"),
+    "Key_Level_XO-2": ItemData(54125522, "progression"),
+
+    "Key_Level_XT-1": ItemData(54125523, "progression"),
+    "Key_Level_XT-2": ItemData(54125524, "progression"),
+    "Key_Level_XT-3": ItemData(54125525, "progression"),
+    "Key_Level_XT-4": ItemData(54125526, "progression"),
+    "Key_Level_XT-5": ItemData(54125527, "progression"),
+    "Key_Level_XT-6": ItemData(54125528, "progression"),
+    "Key_Level_XT-7": ItemData(54125529, "progression"),
+    "Key_Level_XT-8": ItemData(54125530, "progression"),
+
+    "Key_Level_XI-1": ItemData(54125531, "progression"),
+    "Key_Level_XI-2": ItemData(54125532, "progression"),
+    "Key_Level_XI-3": ItemData(54125533, "progression"),
+    "Key_Level_XI-4": ItemData(54125534, "progression"),
+    "Key_Level_XI-5": ItemData(54125535, "progression"),
+    "Key_Level_XI-6": ItemData(54125536, "progression"),
+    "Key_Level_XI-7": ItemData(54125537, "progression"),
+}
+
+StarWorldsKeys = {
+    "Key_Level_MN-X": ItemData(54125555, "progression"),
+    "Key_Level_ML-X": ItemData(54125556, "progression"),
+    "Key_Level_MO-X": ItemData(54125557, "progression"),
+}
+
+StarWorldsTutoKeys = {
+    "Key_Level_MN-1": ItemData(54125541, "progression"),
+    "Key_Level_MN-2": ItemData(54125542, "progression"),
+    "Key_Level_MN-3": ItemData(54125543, "progression"),
+    "Key_Level_MN-4": ItemData(54125544, "progression"),
+
+    "Key_Level_ML-1": ItemData(54125545, "progression"),
+    "Key_Level_ML-2": ItemData(54125546, "progression"),
+    "Key_Level_ML-3": ItemData(54125547, "progression"),
+    "Key_Level_ML-4": ItemData(54125548, "progression"),
+    "Key_Level_ML-5": ItemData(54125549, "progression"),
+    "Key_Level_ML-6": ItemData(54125550, "progression"),
+    "Key_Level_ML-7": ItemData(54125551, "progression"),
+
+    "Key_Level_MO-1": ItemData(54125552, "progression"),
+    "Key_Level_MO-2": ItemData(54125553, "progression"),
+    "Key_Level_MO-3": ItemData(54125554, "progression"),
+}
+
+

@@ -158,3 +158,12 @@ XtraTutoKeys = {
 OtherItems = {
     "Filler Note": ItemData(54125518, "filler") 
 }
+
+BWorldKeys = {
+    "Key_Level_B-X": ItemData(54125519, "progression"),
+}
+
+BWorldTutoKeys = {
+    "Key_Level_B-1": ItemData(54125520, "progression"),
+}
+

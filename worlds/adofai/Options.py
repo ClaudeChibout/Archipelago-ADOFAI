@@ -12,6 +12,11 @@ class XtraWorlds(Toggle):
 class XtraWorldsTuto(Toggle):
     display_name = "XtraWorldsTuto"
 
+class BWorld(Toggle):
+    display_name = "BWorld"
+
+class BWorldTuto(Toggle):
+    display_name = "BWorldTuto"
 
 @dataclass
 class ADOFAIOptions(PerGameCommonOptions):
@@ -19,3 +24,5 @@ class ADOFAIOptions(PerGameCommonOptions):
     main_worlds_tuto: MainWorldsTuto
     xtra_worlds: XtraWorlds
     xtra_worlds_tuto: XtraWorldsTuto
+    b_world: BWorld
+    b_world_tuto: BWorldTuto

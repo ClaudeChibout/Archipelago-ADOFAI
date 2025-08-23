@@ -6,14 +6,16 @@ from worlds.generic.Rules import add_rule
 
 # Import des données
 from .Items import adofai_items, MainWorldsKeys, MainWorldsTutoKeys, OtherItems, XtraWorldsKeys, XtraTutoKeys
+from .Items import BWorldKeys, BWorldTutoKeys
 from .Locations import adofai_locations, MainWorldsLoc, MainWorldsTutoLoc, XtraWorldsLoc, XtraTutoLoc
+from .Locations import BWorldLoc, BWorldTutoLoc
 from .Options import ADOFAIOptions
 
 
-all_items = adofai_items | MainWorldsKeys | MainWorldsTutoKeys | XtraTutoKeys | XtraWorldsKeys | OtherItems
+all_items = adofai_items | MainWorldsKeys | MainWorldsTutoKeys | XtraTutoKeys | XtraWorldsKeys | OtherItems | BWorldKeys | BWorldTutoKeys
 _item_name_to_id = {n: d.id for n, d in all_items.items()}
 
-all_locs = adofai_locations | MainWorldsLoc | MainWorldsTutoLoc | XtraTutoLoc | XtraWorldsLoc
+all_locs = adofai_locations | MainWorldsLoc | MainWorldsTutoLoc | XtraTutoLoc | XtraWorldsLoc | BWorldLoc | BWorldTutoLoc
 _location_name_to_id = {n: d.id for n, d in all_locs.items()}
 
 
@@ -29,12 +31,12 @@ class ADOFAIWorld(World):
 
     def create_item_name_to_id(self) -> dict[str, int]:
         # Mapping exhaustif pour DataPackage
-        all_items = adofai_items | MainWorldsKeys | MainWorldsTutoKeys | XtraTutoKeys | XtraWorldsKeys | OtherItems
+        all_items = adofai_items | MainWorldsKeys | MainWorldsTutoKeys | XtraTutoKeys | XtraWorldsKeys | OtherItems | BWorldKeys | BWorldTutoKeys
         return {n: d.id for n, d in all_items.items()}
 
     def create_location_name_to_id(self) -> dict[str, int]:
         # Mapping exhaustif pour DataPackage
-        all_locs = adofai_locations | MainWorldsLoc | MainWorldsTutoLoc | XtraTutoLoc | XtraWorldsLoc
+        all_locs = adofai_locations | MainWorldsLoc | MainWorldsTutoLoc | XtraTutoLoc | XtraWorldsLoc | BWorldLoc | BWorldTutoLoc
         return {n: d.id for n, d in all_locs.items()}
 
 
@@ -49,6 +51,10 @@ class ADOFAIWorld(World):
             used_locs.update(XtraTutoLoc)
         if self.options.xtra_worlds.value:
             used_locs.update(XtraWorldsLoc)
+        if self.options.b_world.value:
+            used_locs.update(BWorldLoc)
+        if self.options.b_world_tuto.value:
+            used_locs.update(BWorldTutoLoc)
 
         # Création des régions et placement des locations filtrées
         menu = Region("Menu", self.player, self.multiworld)
@@ -95,6 +101,10 @@ class ADOFAIWorld(World):
             used_items.update(XtraWorldsKeys)
         if self.options.xtra_worlds_tuto.value:
             used_items.update(XtraTutoKeys)
+        if self.options.b_world.value:
+            used_items.update(BWorldKeys)
+        if self.options.b_world_tuto.value:
+            used_items.update(BWorldTutoKeys)
 
         for item_name in used_items.keys():
             self.multiworld.itempool.append(make_item(item_name))
@@ -129,7 +139,9 @@ class ADOFAIWorld(World):
             "death_link": bool(self.options.death_link.value),
             "main_worlds_tuto": bool(self.options.main_worlds_tuto.value),
             "xtra_worlds": bool(self.options.xtra_worlds.value),
-            "xtra_worlds_tuto": bool(self.options.xtra_worlds_tuto.value)
+            "xtra_worlds_tuto": bool(self.options.xtra_worlds_tuto.value),
+            "b_world": bool(self.options.b_world.value),
+            "b_world_tuto": bool(self.options.b_world_tuto.value),
         }
 
 

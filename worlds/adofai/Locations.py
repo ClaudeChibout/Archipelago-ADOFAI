@@ -169,3 +169,12 @@ XtraTutoLoc = {
     "XM-4": LocData(98765536, "World XM"),
 }
 
+
+BWorldLoc = {
+    "B-X": LocData(98765537, "World B"),
+}
+
+BWorldTutoLoc = {
+    "B-1": LocData(98765538, "World B"),
+}
+

@@ -3,6 +3,8 @@
 from worlds.AutoWorld import World
 from BaseClasses import  Item, Location, ItemClassification, Region
 from worlds.generic.Rules import add_rule
+from Options import OptionError
+
 
 # Import des données
 from .Items import adofai_items, MainWorldsKeys, MainWorldsTutoKeys, OtherItems, XtraWorldsKeys, XtraTutoKeys
@@ -27,6 +29,7 @@ all_locs = all_locs | NeonCosmosWorldsLoc | NeonCosmosWorldsTutoLoc | NeonCosmos
 _location_name_to_id = {n: d.id for n, d in all_locs.items()}
 
 
+
 class ADOFAIWorld(World):
     game = "A Dance of Fire and Ice"
     topology_present = True
@@ -39,35 +42,7 @@ class ADOFAIWorld(World):
 
     def create_regions(self):
         # Filtre pool effectif selon options
-        used_locs = adofai_locations.copy()
-        used_locs.update(MainWorldsLoc)
-
-        if self.options.main_worlds_tuto.value:
-            used_locs.update(MainWorldsTutoLoc)
-        if self.options.xtra_worlds_tuto.value:
-            used_locs.update(XtraTutoLoc)
-        if self.options.xtra_worlds.value:
-            used_locs.update(XtraWorldsLoc)
-        if self.options.b_world.value:
-            used_locs.update(BWorldLoc)
-        if self.options.b_world_tuto.value:
-            used_locs.update(BWorldTutoLoc)
-        if self.options.crown_worlds.value:
-            used_locs.update(CrownWorldsLoc)
-        if self.options.crown_worlds_tuto.value:
-            used_locs.update(CrownWorldsTutoLoc)
-        if self.options.star_worlds.value:
-            used_locs.update(StarWorldsLoc)
-        if self.options.star_worlds_tuto.value:
-            used_locs.update(StarWorldsTutoLoc)
-        if self.options.neon_cosmos_worlds.value:
-            used_locs.update(NeonCosmosWorldsLoc)
-        if self.options.neon_cosmos_worlds_ex_tuto.value:
-            used_locs.update(NeonCosmosWorldsTutoLoc)
-        if self.options.neon_cosmos_worlds.value:
-            used_locs.update(NeonCosmosWorldsEXLoc)
-        if self.options.neon_cosmos_worlds_ex_tuto.value:
-            used_locs.update(NeonCosmosWorldsEXTutoLoc)
+        used_locs = self.get_used_locations()
 
         # Création des régions et placement des locations filtrées
         menu = Region("Menu", self.player, self.multiworld)
@@ -163,7 +138,16 @@ class ADOFAIWorld(World):
     def fill_slot_data(self) -> dict:
         """Données envoyées au client ADOFAI."""
         return {
-            "goal": "clear_some_worlds",
+            "percentage_goal_completion": int(self.options.percentage_goal_completion.value),
+            "completion_goal": self.options.completion_goal.value,
+            "goal_levels": str(
+                " ".join([x for x in self.get_used_locations().keys() if x.endswith("X")])
+            ) if self.options.completion_goal.value == 0 else (
+                str(self.options.goal_levels.value) if self.options.completion_goal.value == 1 else
+                OptionError("option goal bad value")
+            ),
+
+
             "world_regions": sorted({data.world for data in adofai_locations.values() if data.world}),
             "death_link": bool(self.options.death_link.value),
             "main_worlds_tuto": bool(self.options.main_worlds_tuto.value),
@@ -181,6 +165,39 @@ class ADOFAIWorld(World):
             "neon_cosmos_worlds_ex_tuto": bool(self.options.neon_cosmos_worlds_ex_tuto.value),
 
         }
+    
+    def get_used_locations(self):
+        used_locs = adofai_locations.copy()
+        used_locs.update(MainWorldsLoc)
+
+        if self.options.main_worlds_tuto.value:
+            used_locs.update(MainWorldsTutoLoc)
+        if self.options.xtra_worlds_tuto.value:
+            used_locs.update(XtraTutoLoc)
+        if self.options.xtra_worlds.value:
+            used_locs.update(XtraWorldsLoc)
+        if self.options.b_world.value:
+            used_locs.update(BWorldLoc)
+        if self.options.b_world_tuto.value:
+            used_locs.update(BWorldTutoLoc)
+        if self.options.crown_worlds.value:
+            used_locs.update(CrownWorldsLoc)
+        if self.options.crown_worlds_tuto.value:
+            used_locs.update(CrownWorldsTutoLoc)
+        if self.options.star_worlds.value:
+            used_locs.update(StarWorldsLoc)
+        if self.options.star_worlds_tuto.value:
+            used_locs.update(StarWorldsTutoLoc)
+        if self.options.neon_cosmos_worlds.value:
+            used_locs.update(NeonCosmosWorldsLoc)
+        if self.options.neon_cosmos_worlds_ex_tuto.value:
+            used_locs.update(NeonCosmosWorldsTutoLoc)
+        if self.options.neon_cosmos_worlds.value:
+            used_locs.update(NeonCosmosWorldsEXLoc)
+        if self.options.neon_cosmos_worlds_ex_tuto.value:
+            used_locs.update(NeonCosmosWorldsEXTutoLoc)
+
+        return used_locs
 
 
 

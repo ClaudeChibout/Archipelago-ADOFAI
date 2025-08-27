@@ -46,7 +46,18 @@ class ADOFAIWorld(World):
 
         # Création des régions et placement des locations filtrées
         menu = Region("Menu", self.player, self.multiworld)
+
+        vLoc = Location(self.player, "Victory", 54125399, menu)
+        menu.locations.append(vLoc)
+        
+        vItem = Item("Victory", ItemClassification.progression, 54125399, self.player)
+        self.multiworld.itempool.append(vItem)
+
+        vLoc.place_locked_item(vItem)
+        
+
         self.multiworld.regions.append(menu)
+
 
         region_by_name = {"Menu": menu}
         for wname in sorted({data.world for data in used_locs.values() if data.world}):

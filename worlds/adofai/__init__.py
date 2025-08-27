@@ -137,6 +137,7 @@ class ADOFAIWorld(World):
 
     def set_rules(self) -> None:
         """Tout est ouvert par défaut; ajoute tes règles d'accès par région si besoin."""
+        self.world.multiworld.completion_condition[self.player] = lambda state: state.has("Victory", self.player)
         return
 
     def get_filler_item_name(self) -> str:

@@ -46,16 +46,6 @@ class ADOFAIWorld(World):
 
         # Création des régions et placement des locations filtrées
         menu = Region("Menu", self.player, self.multiworld)
-
-        vLoc = Location(self.player, "Victory", 54125399, menu)
-        menu.locations.append(vLoc)
-        
-        vItem = Item("Victory", ItemClassification.progression, 54125399, self.player)
-        self.multiworld.itempool.append(vItem)
-
-        vLoc.place_locked_item(vItem)
-        
-
         self.multiworld.regions.append(menu)
 
 
@@ -137,7 +127,6 @@ class ADOFAIWorld(World):
 
     def set_rules(self) -> None:
         """Tout est ouvert par défaut; ajoute tes règles d'accès par région si besoin."""
-        self.world.multiworld.completion_condition[self.player] = lambda state: state.has("Victory", self.player)
         return
 
     def get_filler_item_name(self) -> str:

@@ -290,4 +290,14 @@ NeonCosmosWorldsEXKeys = {
     "Key_Level_T3EX-X": ItemData(54125609, "progression"),
 }
 
+AprilFoolsWorldsKeys = {
+    "Key_Level_1J-X": ItemData(54125610, "progression"),
+    "Key_Level_2J-X": ItemData(54125611, "progression"),
+    "Key_Level_3J-X": ItemData(54125612, "progression"),
+    "Key_Level_4J-X": ItemData(54125613, "progression"),
+    "Key_Level_5J-X": ItemData(54125614, "progression"),
+    "Key_Level_6J-X": ItemData(54125615, "progression"),
+    "Key_Level_BJ-X": ItemData(54125616, "progression")
+}
+
 

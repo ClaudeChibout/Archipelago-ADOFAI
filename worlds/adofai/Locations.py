@@ -301,3 +301,13 @@ NeonCosmosWorldsEXLoc = {
     "T3EX-X": LocData(98765627, "World T3EX"),
 }
 
+AprilFoolsWorldsLoc = {
+    "1J-X": LocData(98765628, "World 1"),
+    "2J-X": LocData(98765629, "World 2"),
+    "3J-X": LocData(98765630, "World 3"),
+    "4J-X": LocData(98765631, "World 4"),
+    "5J-X": LocData(98765632, "World 5"),
+    "6J-X": LocData(98765633, "World 6"),
+    "BJ-X": LocData(98765634, "World B")
+}
+

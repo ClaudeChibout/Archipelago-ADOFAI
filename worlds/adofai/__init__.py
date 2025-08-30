@@ -1,7 +1,7 @@
 # world/__init__.py
 
-from worlds.AutoWorld import World
-from BaseClasses import  Item, Location, ItemClassification, Region
+from worlds.AutoWorld import World, WebWorld, logging
+from BaseClasses import  Item, Location, ItemClassification, Region, Tutorial
 from worlds.generic.Rules import add_rule
 from Options import OptionError
 
@@ -10,25 +10,49 @@ from Options import OptionError
 from .Items import adofai_items, MainWorldsKeys, MainWorldsTutoKeys, OtherItems, XtraWorldsKeys, XtraTutoKeys
 from .Items import BWorldKeys, BWorldTutoKeys, CrownWorldsKeys, CrownWorldsTutoKeys, StarWorldsKeys, StarWorldsTutoKeys
 from .Items import NeonCosmosWorldsKeys, NeonCosmosWorldsTutoKeys, NeonCosmosWorldsEXKeys, NeonCosmosWorldsEXTutoKeys
+from .Items import AprilFoolsWorldsKeys
 from .Locations import adofai_locations, MainWorldsLoc, MainWorldsTutoLoc, XtraWorldsLoc, XtraTutoLoc
 from .Locations import BWorldLoc, BWorldTutoLoc, CrownWorldsLoc, CrownWorldsTutoLoc, StarWorldsLoc, StarWorldsTutoLoc
 from .Locations import NeonCosmosWorldsLoc, NeonCosmosWorldsTutoLoc, NeonCosmosWorldsEXLoc, NeonCosmosWorldsEXTutoLoc
+from .Locations import AprilFoolsWorldsLoc
 from .Options import ADOFAIOptions
 
 
 all_items = adofai_items | MainWorldsKeys | MainWorldsTutoKeys | XtraTutoKeys | XtraWorldsKeys
 all_items = all_items | OtherItems | BWorldKeys | BWorldTutoKeys | CrownWorldsKeys | CrownWorldsTutoKeys
-all_items = all_items | StarWorldsKeys | StarWorldsTutoKeys
+all_items = all_items | StarWorldsKeys | StarWorldsTutoKeys | AprilFoolsWorldsKeys
 all_items = all_items | NeonCosmosWorldsKeys | NeonCosmosWorldsTutoKeys | NeonCosmosWorldsEXKeys | NeonCosmosWorldsEXTutoKeys
 _item_name_to_id = {n: d.id for n, d in all_items.items()}
 
 all_locs = adofai_locations | MainWorldsLoc | MainWorldsTutoLoc | XtraTutoLoc | XtraWorldsLoc
 all_locs = all_locs | BWorldLoc | BWorldTutoLoc | CrownWorldsLoc | CrownWorldsTutoLoc
-all_locs = all_locs | StarWorldsLoc | StarWorldsTutoLoc 
+all_locs = all_locs | StarWorldsLoc | StarWorldsTutoLoc | AprilFoolsWorldsLoc
 all_locs = all_locs | NeonCosmosWorldsLoc | NeonCosmosWorldsTutoLoc | NeonCosmosWorldsEXLoc | NeonCosmosWorldsEXTutoLoc
 _location_name_to_id = {n: d.id for n, d in all_locs.items()}
 
 
+class AdventureWeb(WebWorld):
+    theme = "dirt"
+
+    setup = Tutorial(
+        "Multiworld Setup Guide",
+        "A guide to setting up A Dance of Fire and Ice for MultiWorld.",
+        "English",
+        "setup_en.md",
+        "setup/en",
+        ["Shotal"]
+    )
+
+    setup_fr = Tutorial(
+        "Guide de configuration Multimonde",
+        "Un guide pour configurer A Dance of Fire and Ice MultiWorld",
+        "Français",
+        "setup_fr.md",
+        "setup/fr",
+        ["Shotal"]
+    )
+
+    tutorials = [setup, setup_fr]
 
 class ADOFAIWorld(World):
     game = "A Dance of Fire and Ice"
@@ -110,6 +134,8 @@ class ADOFAIWorld(World):
             used_items.update(NeonCosmosWorldsEXKeys)
         if self.options.neon_cosmos_worlds_ex_tuto.value:
             used_items.update(NeonCosmosWorldsEXTutoKeys)
+        if self.options.april_fools_worlds.value:
+            used_items.update(AprilFoolsWorldsKeys)
 
         for item_name in used_items.keys():
             self.multiworld.itempool.append(make_item(item_name))
@@ -144,7 +170,7 @@ class ADOFAIWorld(World):
             "goal_levels": str(
                 " ".join([x for x in self.get_used_locations().keys() if x.endswith("X")])
             ) if self.options.completion_goal.value == 0 else (
-                str(self.options.goal_levels.value) if self.options.completion_goal.value == 1 else
+                self.clear_goal_levels(str(self.options.goal_levels.value)) if self.options.completion_goal.value == 1 else
                 OptionError("option goal bad value")
             ),
 
@@ -164,6 +190,7 @@ class ADOFAIWorld(World):
             "neon_cosmos_worlds_tuto": bool(self.options.neon_cosmos_worlds_tuto.value),
             "neon_cosmos_worlds_ex": bool(self.options.neon_cosmos_worlds_ex.value),
             "neon_cosmos_worlds_ex_tuto": bool(self.options.neon_cosmos_worlds_ex_tuto.value),
+            "april_fools_worlds": bool(self.options.april_fools_worlds.value),
 
         }
     
@@ -197,9 +224,20 @@ class ADOFAIWorld(World):
             used_locs.update(NeonCosmosWorldsEXLoc)
         if self.options.neon_cosmos_worlds_ex_tuto.value:
             used_locs.update(NeonCosmosWorldsEXTutoLoc)
+        if self.options.april_fools_worlds.value:
+            used_locs.update(AprilFoolsWorldsLoc)
 
         return used_locs
 
 
-
+    def clear_goal_levels(self, goalLevels: str) -> str :
+        res = []
+        used_locations = (self.get_used_locations()).keys()
+        for x in goalLevels.split():
+            if x in used_locations:
+                res.append(x)
+            else:
+                print(f"{x} is not an enabled level, it's remove from the goal levels")
+        
+        return " ".join(res)
 

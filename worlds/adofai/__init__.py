@@ -128,9 +128,9 @@ class ADOFAIWorld(World):
             used_items.update(StarWorldsTutoKeys)
         if self.options.neon_cosmos_worlds.value:
             used_items.update(NeonCosmosWorldsKeys)
-        if self.options.neon_cosmos_worlds_ex_tuto.value:
+        if self.options.neon_cosmos_worlds_tuto.value:
             used_items.update(NeonCosmosWorldsTutoKeys)
-        if self.options.neon_cosmos_worlds.value:
+        if self.options.neon_cosmos_worlds_ex.value:
             used_items.update(NeonCosmosWorldsEXKeys)
         if self.options.neon_cosmos_worlds_ex_tuto.value:
             used_items.update(NeonCosmosWorldsEXTutoKeys)
@@ -218,9 +218,9 @@ class ADOFAIWorld(World):
             used_locs.update(StarWorldsTutoLoc)
         if self.options.neon_cosmos_worlds.value:
             used_locs.update(NeonCosmosWorldsLoc)
-        if self.options.neon_cosmos_worlds_ex_tuto.value:
+        if self.options.neon_cosmos_worlds_tuto.value:
             used_locs.update(NeonCosmosWorldsTutoLoc)
-        if self.options.neon_cosmos_worlds.value:
+        if self.options.neon_cosmos_worlds_ex.value:
             used_locs.update(NeonCosmosWorldsEXLoc)
         if self.options.neon_cosmos_worlds_ex_tuto.value:
             used_locs.update(NeonCosmosWorldsEXTutoLoc)

@@ -89,22 +89,21 @@ class ADOFAIWorld(World):
             if loc_name not in adofai_locations.keys():
                 add_rule(loc, lambda state, ln=loc_name: state.has(f"Key_Level_{ln}", self.player))
 
+    def create_item(self, name: str) -> Item:
+        data = all_items[name]
+        cls = {
+            "progression": ItemClassification.progression,
+            "useful": ItemClassification.useful,
+            "filler": ItemClassification.filler,
+            "trap": ItemClassification.trap,
+        }.get(data.classification, ItemClassification.filler)
+        return Item(name, cls, data.id, self.player)
 
     def create_items(self) -> None:
         """Construit l'itempool: progression + useful, puis filler jusqu'à couvrir toutes les locations.
         Je dois utiliser les options pour créer le pool d'item
         """
         self.generate_early()
-
-        def make_item(name: str) -> Item:
-            data = all_items[name]
-            cls = {
-                "progression": ItemClassification.progression,
-                "useful": ItemClassification.useful,
-                "filler": ItemClassification.filler,
-                "trap": ItemClassification.trap,
-            }.get(data.classification, ItemClassification.filler)
-            return Item(name, cls, data.id, self.player)
 
         used_items = adofai_items | MainWorldsKeys
 
@@ -138,7 +137,7 @@ class ADOFAIWorld(World):
             used_items.update(AprilFoolsWorldsKeys)
 
         for item_name in used_items.keys():
-            self.multiworld.itempool.append(make_item(item_name))
+            self.multiworld.itempool.append(self.create_item(item_name))
         
         total_locations = len([
             loc for loc in self.multiworld.get_locations(self.player)

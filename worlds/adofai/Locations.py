@@ -170,6 +170,8 @@ XtraTutoLoc = {
 }
 
 
+
+
 BWorldLoc = {
     "B-X": LocData(98765537, "World B"),
 }
@@ -309,5 +311,20 @@ AprilFoolsWorldsLoc = {
     "5J-X": LocData(98765632, "World 5"),
     "6J-X": LocData(98765633, "World 6"),
     "BJ-X": LocData(98765634, "World B")
+}
+
+ARWorldLoc = {
+    "AR-X": LocData(98765635, "World AR"),
+}
+
+ARWorldTutoLoc = {
+    "AR-1": LocData(98765636, "World AR"),
+    "AR-2": LocData(98765637, "World AR"),
+    "AR-3": LocData(98765638, "World AR"),
+    "AR-4": LocData(98765639, "World AR"),
+    "AR-5": LocData(98765640, "World AR"),
+    "AR-6": LocData(98765641, "World AR"),
+    "AR-7": LocData(98765642, "World AR"),
+    "AR-8": LocData(98765643, "World AR"),
 }
 

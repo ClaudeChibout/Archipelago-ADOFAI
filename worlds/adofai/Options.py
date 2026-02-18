@@ -45,6 +45,12 @@ class NeonCosmosWorldsEXTuto(Toggle):
 class AprilFoolsWorlds(Toggle):
     display_name= "AprilFoolsWorlds"
 
+class ARWorld(Toggle):
+    display_name= "ARWorld"
+
+class ARWorldTuto(Toggle):
+    display_name= "ARWorldTuto"
+
 class CompletionGoal(Choice):
     display_name = "CompletionGoal"
     option_allX = 0
@@ -78,6 +84,8 @@ class ADOFAIOptions(PerGameCommonOptions):
     neon_cosmos_worlds_ex: NeonCosmosWorldsEX
     neon_cosmos_worlds_ex_tuto: NeonCosmosWorldsEXTuto
     april_fools_worlds: AprilFoolsWorlds
+    ar_world: ARWorld
+    ar_world_tuto: ARWorldTuto
     percentage_goal_completion: PercentageGoalCompletion
     completion_goal: CompletionGoal
     goal_levels: GoalLevels

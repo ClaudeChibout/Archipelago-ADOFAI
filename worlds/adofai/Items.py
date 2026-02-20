@@ -305,13 +305,13 @@ ARWorldKeys = {
 }
 
 ARWorldTutoKeys = {
-    "Key_Level_AR-1": ItemData(54125617, "progression"),
-    "Key_Level_AR-2": ItemData(54125618, "progression"),
-    "Key_Level_AR-3": ItemData(54125619, "progression"),
-    "Key_Level_AR-4": ItemData(54125620, "progression"),
-    "Key_Level_AR-5": ItemData(54125621, "progression"),
-    "Key_Level_AR-6": ItemData(54125622, "progression"),
-    "Key_Level_AR-7": ItemData(54125623, "progression"),
-    "Key_Level_AR-8": ItemData(54125624, "progression"),
+    "Key_Level_AR-1": ItemData(54125618, "progression"),
+    "Key_Level_AR-2": ItemData(54125619, "progression"),
+    "Key_Level_AR-3": ItemData(54125620, "progression"),
+    "Key_Level_AR-4": ItemData(54125621, "progression"),
+    "Key_Level_AR-5": ItemData(54125622, "progression"),
+    "Key_Level_AR-6": ItemData(54125623, "progression"),
+    "Key_Level_AR-7": ItemData(54125624, "progression"),
+    "Key_Level_AR-8": ItemData(54125625, "progression"),
 }
 

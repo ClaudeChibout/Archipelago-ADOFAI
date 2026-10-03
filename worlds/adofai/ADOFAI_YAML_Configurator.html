@@ -1,0 +1,496 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ADOFAI YAML Configurator</title>
+<meta name="description" content="Build a ready-to-use Archipelago YAML for A Dance of Fire and Ice by ticking the worlds and goal you want.">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: two-pane workbench, controls on the left and a sticky live YAML panel on the right; stacks to one column on phones. */
+:root{
+  --bg:#f3f5fb; --surface:#ffffff; --surface-2:#eceffa; --fg:#13151f; --muted:#5a6079;
+  --border:#d8dcee; --border-strong:#c3c8e0;
+  --fire:#e23a5e; --fire-soft:#fce4ea; --ice:#2f6fd6; --ice-soft:#e2ecfb;
+  --good:#1f9d6b; --warn:#c07a00;
+  --accent:var(--fire);
+  --shadow:0 1px 2px rgba(20,22,40,.06),0 8px 24px rgba(20,22,40,.06);
+  --font-display:"Chakra Petch",system-ui,sans-serif;
+  --font-body:"DM Sans",system-ui,-apple-system,sans-serif;
+  --font-mono:"JetBrains Mono",ui-monospace,"SFMono-Regular",Menlo,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0a0c15; --surface:#141827; --surface-2:#1b2034; --fg:#eceef8; --muted:#9aa0bc;
+  --border:#29304a; --border-strong:#39415f;
+  --fire:#ff5c7a; --fire-soft:#2a1620; --ice:#5aa6ff; --ice-soft:#121f33;
+  --good:#43d6a0; --warn:#ffb64d; --accent:var(--fire);
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 30px rgba(0,0,0,.4);
+  color-scheme:dark;
+}}
+:root[data-theme="dark"]{
+  --bg:#0a0c15; --surface:#141827; --surface-2:#1b2034; --fg:#eceef8; --muted:#9aa0bc;
+  --border:#29304a; --border-strong:#39415f;
+  --fire:#ff5c7a; --fire-soft:#2a1620; --ice:#5aa6ff; --ice-soft:#121f33;
+  --good:#43d6a0; --warn:#ffb64d; --accent:var(--fire);
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 30px rgba(0,0,0,.4);
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--font-body);line-height:1.5;
+  background-image:radial-gradient(1200px 500px at 85% -5%,color-mix(in srgb,var(--ice) 14%,transparent),transparent 60%),radial-gradient(1000px 450px at 0% 0%,color-mix(in srgb,var(--fire) 12%,transparent),transparent 55%);
+  background-attachment:fixed;}
+.wrap{max-width:1140px;margin:0 auto;padding-inline:16px;padding-block:28px 56px}
+
+/* header */
+.top{display:flex;align-items:flex-start;gap:16px;flex-wrap:wrap;margin-bottom:22px}
+.brand{display:flex;gap:14px;align-items:center;min-width:0}
+.orbs{flex:none;width:46px;height:46px;position:relative}
+.orb{position:absolute;width:26px;height:26px;border-radius:50%}
+.orb.f{left:0;top:2px;background:radial-gradient(circle at 32% 30%,#ff9fb0,var(--fire));box-shadow:0 0 18px color-mix(in srgb,var(--fire) 55%,transparent)}
+.orb.i{right:0;bottom:2px;background:radial-gradient(circle at 32% 30%,#bcdcff,var(--ice));box-shadow:0 0 18px color-mix(in srgb,var(--ice) 55%,transparent)}
+h1{font-family:var(--font-display);font-weight:700;font-size:clamp(1.3rem,3.4vw,1.72rem);margin:0;letter-spacing:.3px;text-wrap:balance}
+.sub{color:var(--muted);font-size:.92rem;margin:2px 0 0}
+.theme-btn{margin-left:auto;flex:none;border:1px solid var(--border-strong);background:var(--surface);color:var(--fg);
+  font-family:var(--font-body);font-size:.85rem;font-weight:600;border-radius:999px;padding:8px 14px;cursor:pointer}
+.theme-btn:hover{border-color:var(--accent)}
+
+/* grid */
+.grid{display:grid;grid-template-columns:1fr minmax(320px,0.82fr);gap:22px;align-items:start}
+@media (max-width:860px){.grid{grid-template-columns:1fr}}
+
+/* cards / sections */
+.card{background:var(--surface);border:1px solid var(--border);border-radius:16px;box-shadow:var(--shadow);padding:20px;margin-bottom:18px}
+.card>h2{font-family:var(--font-display);font-weight:600;font-size:1.02rem;margin:0 0 3px;display:flex;align-items:center;gap:9px;letter-spacing:.3px}
+.step{font-family:var(--font-mono);font-size:.72rem;font-weight:600;color:var(--bg);background:var(--accent);
+  width:22px;height:22px;border-radius:7px;display:inline-grid;place-items:center;flex:none}
+.hint{color:var(--muted);font-size:.86rem;margin:0 0 14px}
+
+label.field{display:block;font-size:.82rem;font-weight:600;color:var(--muted);letter-spacing:.3px;margin-bottom:6px;text-transform:uppercase}
+input[type=text]{width:100%;font-family:var(--font-body);font-size:1rem;color:var(--fg);background:var(--surface-2);
+  border:1px solid var(--border-strong);border-radius:10px;padding:11px 13px}
+input[type=text]:focus-visible{outline:2px solid var(--accent);outline-offset:1px;border-color:var(--accent)}
+
+/* toggle rows */
+.worlds{display:flex;flex-direction:column;gap:9px}
+.world{border:1px solid var(--border);border-radius:12px;padding:11px 13px;background:var(--surface-2);
+  display:grid;grid-template-columns:1fr auto;gap:6px 12px;align-items:center}
+.world .wname{font-weight:700;font-size:.97rem;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.world .wdesc{grid-column:1/-1;color:var(--muted);font-size:.82rem;margin-top:-2px}
+.tag{font-family:var(--font-mono);font-size:.64rem;font-weight:600;letter-spacing:.4px;text-transform:uppercase;
+  padding:2px 7px;border-radius:999px;border:1px solid var(--border-strong);color:var(--muted)}
+.tag.on{color:var(--ice);border-color:color-mix(in srgb,var(--ice) 45%,transparent);background:var(--ice-soft)}
+.ctrls{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+
+.sw{--c:var(--accent);display:inline-flex;align-items:center;gap:8px;cursor:pointer;user-select:none;
+  border:1px solid var(--border-strong);background:var(--surface);border-radius:999px;padding:5px 11px 5px 7px;font-size:.8rem;font-weight:600;color:var(--muted)}
+.sw .dot{width:34px;height:19px;border-radius:999px;background:color-mix(in srgb,var(--muted) 32%,transparent);position:relative;transition:background .15s;flex:none}
+.sw .dot::after{content:"";position:absolute;top:2px;left:2px;width:15px;height:15px;border-radius:50%;background:#fff;transition:transform .15s;box-shadow:0 1px 2px rgba(0,0,0,.35)}
+.sw[aria-pressed=true]{color:var(--fg);border-color:color-mix(in srgb,var(--c) 55%,transparent)}
+.sw[aria-pressed=true] .dot{background:var(--c)}
+.sw[aria-pressed=true] .dot::after{transform:translateX(15px)}
+.sw.ice{--c:var(--ice)}
+.sw:focus-visible{outline:2px solid var(--c);outline-offset:2px}
+.sw.locked{opacity:.45;cursor:not-allowed}
+
+/* goal */
+.radios{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px}
+.radio{flex:1 1 180px;min-width:0;border:1px solid var(--border-strong);border-radius:12px;padding:12px 14px;cursor:pointer;background:var(--surface-2)}
+.radio[aria-checked=true]{border-color:var(--accent);background:color-mix(in srgb,var(--fire) 9%,var(--surface-2));box-shadow:inset 0 0 0 1px var(--accent)}
+.radio .rt{font-weight:700;font-family:var(--font-display);display:flex;align-items:center;gap:8px}
+.radio .rd{color:var(--muted);font-size:.82rem;margin-top:3px}
+.radio:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.rk{font-family:var(--font-mono);font-size:.74rem;color:var(--accent);background:var(--fire-soft);border-radius:6px;padding:1px 6px}
+
+.slider-row{display:flex;align-items:center;gap:14px;margin:4px 0 6px}
+input[type=range]{flex:1;min-width:0;accent-color:var(--accent);height:6px}
+.pct{font-family:var(--font-mono);font-weight:600;font-size:1.25rem;min-width:62px;text-align:right;font-variant-numeric:tabular-nums}
+.note{font-size:.85rem;color:var(--muted);background:var(--surface-2);border-left:3px solid var(--ice);border-radius:0 8px 8px 0;padding:9px 12px;margin-top:10px}
+.note.warn{border-left-color:var(--warn)}
+.note b{color:var(--fg)}
+
+.levels{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
+.lvl{font-family:var(--font-mono);font-size:.82rem;font-weight:600;border:1px solid var(--border-strong);background:var(--surface-2);
+  color:var(--muted);border-radius:8px;padding:6px 10px;cursor:pointer}
+.lvl[aria-pressed=true]{color:var(--bg);background:var(--accent);border-color:var(--accent)}
+.lvl:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.empty{color:var(--muted);font-size:.85rem;font-style:italic}
+
+/* YAML panel */
+.preview{position:sticky;top:calc(env(safe-area-inset-top,0px) + 14px)}
+.yhead{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.yfile{font-family:var(--font-mono);font-size:.9rem;font-weight:600;color:var(--fg);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ybtns{margin-left:auto;flex:none;display:flex;gap:8px}
+.copy{border:none;background:var(--accent);color:#fff;font-family:var(--font-body);font-weight:700;
+  font-size:.86rem;border-radius:10px;padding:9px 16px;cursor:pointer}
+.copy:hover{filter:brightness(1.07)}
+.copy.done{background:var(--good)}
+.copy.ghost{background:transparent;color:var(--fg);border:1px solid var(--border-strong)}
+.copy.ghost:hover{border-color:var(--accent);filter:none}
+.copy:focus-visible{outline:2px solid var(--fg);outline-offset:2px}
+pre{margin:0;background:#0c0f1a;border:1px solid var(--border);border-radius:12px;padding:16px;overflow:auto;max-height:62vh}
+pre code{font-family:var(--font-mono);font-size:.82rem;line-height:1.55;color:#d8def0;white-space:pre}
+.yk{color:#8fb7ff}.yv{color:#9fe8c4}.yb{color:#ffb86b}.yc{color:#6b7289;font-style:italic}.yh{color:#ff7f9c}
+.save{font-size:.82rem;color:var(--muted);margin-top:12px}
+.save ol{margin:6px 0 0;padding-left:18px}.save li{margin:3px 0}
+.save code{font-family:var(--font-mono);font-size:.78rem;background:var(--surface-2);padding:1px 5px;border-radius:5px;color:var(--fg)}
+a{color:var(--ice)}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
+</style>
+<style>
+  :root{color-scheme:light}
+  html,body{margin:0}
+  img{max-width:100%}
+  [hidden]{display:none!important}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="brand">
+      <div class="orbs" aria-hidden="true"><span class="orb f"></span><span class="orb i"></span></div>
+      <div>
+        <h1>ADOFAI × Archipelago</h1>
+        <p class="sub">YAML configurator. Tick what you want, copy the result.</p>
+      </div>
+    </div>
+    <button class="theme-btn" id="themeBtn" type="button">◑ Theme</button>
+  </header>
+
+  <div class="grid">
+    <!-- LEFT: controls -->
+    <div>
+      <section class="card">
+        <h2><span class="step">1</span> Player</h2>
+        <p class="hint">This is your slot name on the Archipelago server. The file will be saved as this name.</p>
+        <label class="field" for="pname">Player / slot name</label>
+        <input type="text" id="pname" placeholder="Shotal" maxlength="16" autocomplete="off">
+      </section>
+
+      <section class="card">
+        <h2><span class="step">2</span> Worlds to include</h2>
+        <p class="hint">Each world adds its boss level (<code style="font-family:var(--font-mono)">-X</code>). <b>Tutorials</b> add that world's shorter practice stages as extra locations. More worlds = a longer run.</p>
+        <div class="worlds" id="worlds"></div>
+      </section>
+
+      <section class="card">
+        <h2><span class="step">3</span> Victory condition</h2>
+        <p class="hint">How your slot is marked complete.</p>
+        <div class="radios" id="goalModes" role="radiogroup" aria-label="Completion goal">
+          <div class="radio" role="radio" tabindex="0" data-goal="allX" aria-checked="true">
+            <div class="rt">All boss levels <span class="rk">allX</span></div>
+            <div class="rd">Every <code style="font-family:var(--font-mono)">-X</code> boss of every enabled world is a goal.</div>
+          </div>
+          <div class="radio" role="radio" tabindex="0" data-goal="goalLevels" aria-checked="false">
+            <div class="rt">Chosen levels <span class="rk">goalLevels</span></div>
+            <div class="rd">You pick exactly which levels must be beaten.</div>
+          </div>
+        </div>
+
+        <label class="field" for="pct">Percentage goal completion</label>
+        <div class="slider-row">
+          <input type="range" id="pct" min="0" max="100" value="80" step="5">
+          <span class="pct" id="pctVal">80%</span>
+        </div>
+
+        <div id="goalPick" hidden>
+          <label class="field">Goal levels <span style="text-transform:none;font-weight:500">(click to select)</span></label>
+          <div class="levels" id="levels"></div>
+        </div>
+        <p class="note" id="goalNote"></p>
+      </section>
+
+      <section class="card">
+        <h2><span class="step">4</span> Extras</h2>
+        <div class="worlds">
+          <div class="world">
+            <div class="wname">DeathLink</div>
+            <div class="ctrls"><button class="sw" id="deathlink" type="button" role="switch" aria-pressed="false" aria-label="DeathLink"><span class="dot"></span><span class="lbl">Off</span></button></div>
+            <div class="wdesc">When you die, every other DeathLink player dies too, and vice-versa.</div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- RIGHT: live YAML -->
+    <div>
+      <section class="card preview">
+        <div class="yhead">
+          <span class="yfile" id="yfile">Player1.yaml</span>
+          <div class="ybtns">
+            <button class="copy ghost" id="dlBtn" type="button">Download</button>
+            <button class="copy" id="copyBtn" type="button">Copy</button>
+          </div>
+        </div>
+        <pre><code id="yaml"></code></pre>
+        <div class="save">
+          <b style="color:var(--fg)">Save your file</b>, then play:
+          <ol>
+            <li>Click <b>Download</b> (or <b>Copy</b> and paste into a new file named <code id="fileHint">Player1.yaml</code>)</li>
+            <li>Put it in <code>Archipelago\Players\</code></li>
+            <li>Open Archipelago, click <b>Generate</b>, then <b>Host</b> the archive from <code>output\</code></li>
+          </ol>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>
+
+<script>
+"use strict";
+const GROUPS = [
+  {key:"main", name:"Main Worlds", always:true, tuto:"main_worlds_tuto",
+   desc:"Worlds 1-12, the base campaign. Always included.",
+   bosses:["1-X","2-X","3-X","4-X","5-X","6-X","7-X","8-X","9-X","10-X","11-X","12-X"]},
+  {key:"xtra", name:"Xtra Worlds", world:"xtra_worlds", tuto:"xtra_worlds_tuto",
+   desc:"The extra/bonus worlds past the main campaign.",
+   bosses:["XS-X","PA-X","XH-X","XC-X","XF-X","XR-X","RJ-X","XN-X","XM-X"]},
+  {key:"crown", name:"Crown Worlds", world:"crown_worlds", tuto:"crown_worlds_tuto",
+   desc:"The Crown set (XO, XT, XI).",
+   bosses:["XO-X","XT-X","XI-X"]},
+  {key:"star", name:"Star Worlds", world:"star_worlds", tuto:"star_worlds_tuto",
+   desc:"The Star set (MN, ML, MO).",
+   bosses:["MN-X","ML-X","MO-X"]},
+  {key:"neon", name:"Neon Cosmos", world:"neon_cosmos_worlds", tuto:"neon_cosmos_worlds_tuto",
+   desc:"The Neo Cosmos worlds (T1-T5).",
+   bosses:["T1-X","T2-X","T3-X","T4-X","T5-X"]},
+  {key:"neonex", name:"Neon Cosmos EX", world:"neon_cosmos_worlds_ex", tuto:"neon_cosmos_worlds_ex_tuto",
+   desc:"The harder EX variants of the Neo Cosmos worlds.",
+   bosses:["T1EX-X","T2EX-X","T3EX-X","T4EX-X"]},
+  {key:"b", name:"B World", world:"b_world", tuto:"b_world_tuto",
+   desc:"The single B world.",
+   bosses:["B-X"]},
+  {key:"ar", name:"AR World", world:"ar_world", tuto:"ar_world_tuto",
+   desc:"The AR world.",
+   bosses:["AR-X"]},
+  {key:"april", name:"April Fools Worlds", world:"april_fools_worlds",
+   desc:"The joke worlds (1J-6J, BJ). No separate tutorials.",
+   bosses:["1J-X","2J-X","3J-X","4J-X","5J-X","6J-X","BJ-X"]},
+];
+
+const state = {
+  name:"",
+  death_link:false,
+  main_worlds_tuto:false,
+  xtra_worlds:false, xtra_worlds_tuto:false,
+  crown_worlds:false, crown_worlds_tuto:false,
+  star_worlds:false, star_worlds_tuto:false,
+  neon_cosmos_worlds:false, neon_cosmos_worlds_tuto:false,
+  neon_cosmos_worlds_ex:false, neon_cosmos_worlds_ex_tuto:false,
+  b_world:false, b_world_tuto:false,
+  ar_world:false, ar_world_tuto:false,
+  april_fools_worlds:false,
+  completion_goal:"allX",
+  percentage_goal_completion:80,
+  goal_levels:new Set()
+};
+
+// ---- build world rows ----
+const worldsEl = document.getElementById("worlds");
+GROUPS.forEach(g=>{
+  const row = document.createElement("div");
+  row.className = "world";
+  const name = document.createElement("div");
+  name.className = "wname";
+  name.appendChild(document.createTextNode(g.name));
+  if(g.always){ const t=document.createElement("span"); t.className="tag on"; t.textContent="Always on"; name.appendChild(t); }
+  const ctrls = document.createElement("div");
+  ctrls.className = "ctrls";
+  if(g.world){ ctrls.appendChild(makeSwitch(g.world,"Worlds",false)); }
+  if(g.tuto){ ctrls.appendChild(makeSwitch(g.tuto,"Tutorials",true)); }
+  const desc = document.createElement("div");
+  desc.className = "wdesc"; desc.textContent = g.desc;
+  row.appendChild(name); row.appendChild(ctrls); row.appendChild(desc);
+  worldsEl.appendChild(row);
+});
+
+function makeSwitch(optKey,label,isIce){
+  const b = document.createElement("button");
+  b.type="button"; b.className="sw"+(isIce?" ice":""); b.setAttribute("role","switch");
+  b.setAttribute("aria-pressed","false"); b.dataset.opt=optKey;
+  b.setAttribute("aria-label",label);
+  const dot=document.createElement("span"); dot.className="dot";
+  const lbl=document.createElement("span"); lbl.className="lbl"; lbl.textContent=label;
+  b.appendChild(dot); b.appendChild(lbl);
+  b.addEventListener("click",()=>{ state[optKey]=!state[optKey]; syncSwitch(b,optKey); afterWorldChange(); });
+  return b;
+}
+function syncSwitch(b,optKey){ b.setAttribute("aria-pressed", state[optKey]?"true":"false"); }
+
+// deathlink switch
+const dl = document.getElementById("deathlink");
+dl.addEventListener("click",()=>{ state.death_link=!state.death_link; dl.setAttribute("aria-pressed",state.death_link?"true":"false"); dl.querySelector(".lbl").textContent=state.death_link?"On":"Off"; render(); });
+
+// ---- goal modes ----
+document.querySelectorAll("#goalModes .radio").forEach(r=>{
+  const choose=()=>{
+    state.completion_goal=r.dataset.goal;
+    document.querySelectorAll("#goalModes .radio").forEach(x=>x.setAttribute("aria-checked", x===r?"true":"false"));
+    document.getElementById("goalPick").hidden = state.completion_goal!=="goalLevels";
+    render();
+  };
+  r.addEventListener("click",choose);
+  r.addEventListener("keydown",e=>{ if(e.key===" "||e.key==="Enter"){e.preventDefault();choose();} });
+});
+
+// ---- percentage ----
+const pct=document.getElementById("pct");
+pct.addEventListener("input",()=>{ state.percentage_goal_completion=+pct.value; document.getElementById("pctVal").textContent=pct.value+"%"; render(); });
+
+// ---- which bosses are currently available (for the goal picker) ----
+function availableBosses(){
+  const out=[];
+  GROUPS.forEach(g=>{ if(g.always || state[g.world]) out.push(...g.bosses); });
+  return out;
+}
+function afterWorldChange(){
+  // drop goal levels that are no longer available
+  const avail=new Set(availableBosses());
+  [...state.goal_levels].forEach(l=>{ if(!avail.has(l)) state.goal_levels.delete(l); });
+  render();
+}
+
+// ---- render goal picker + yaml ----
+const levelsEl=document.getElementById("levels");
+function renderLevels(){
+  const bosses=availableBosses();
+  levelsEl.innerHTML="";
+  if(!bosses.length){ const e=document.createElement("span"); e.className="empty"; e.textContent="Enable a world first."; levelsEl.appendChild(e); return; }
+  bosses.forEach(l=>{
+    const b=document.createElement("button");
+    b.type="button"; b.className="lvl"; b.textContent=l;
+    b.setAttribute("aria-pressed", state.goal_levels.has(l)?"true":"false");
+    b.addEventListener("click",()=>{ state.goal_levels.has(l)?state.goal_levels.delete(l):state.goal_levels.add(l); b.setAttribute("aria-pressed",state.goal_levels.has(l)?"true":"false"); render(); });
+    levelsEl.appendChild(b);
+  });
+}
+
+function goalNoteText(){
+  const p=state.percentage_goal_completion;
+  if(state.completion_goal==="allX")
+    return `Win by beating <b>every -X boss level</b> of your enabled worlds, and completing <b>${p}%</b> of all the other unlocked levels.`;
+  const n=state.goal_levels.size;
+  if(n===0) return `<b>No goal level chosen.</b> Victory would depend on the <b>${p}%</b> completion only. Pick at least one level above, or switch to “All boss levels”.`;
+  return `Win by beating your <b>${n}</b> chosen level${n>1?"s":""}, and completing <b>${p}%</b> of all other unlocked levels.`;
+}
+
+function esc(s){return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
+
+function buildYamlLines(){
+  const name = (state.name.trim()||"Player1");
+  const B = v => v?"true":"false";
+  const lines=[];
+  const C=t=>({c:t}); const KV=(k,v,kind)=>({k,v,kind});
+  lines.push(C("Archipelago config for A Dance of Fire and Ice"));
+  lines.push(C("Built with the ADOFAI YAML Configurator"));
+  lines.push(KV("name",name,"plain"));
+  lines.push(KV("game","A Dance of Fire and Ice","plain"));
+  lines.push({raw:'<span class="yk">A Dance of Fire and Ice</span><span class="yc">:</span>'});
+  const ind=[];
+  ind.push(C("Victory"));
+  ind.push(KV("completion_goal",state.completion_goal,"plain"));
+  ind.push(KV("percentage_goal_completion",state.percentage_goal_completion,"num"));
+  ind.push(KV("goal_levels",[...state.goal_levels].join(" "),"quoted"));
+  ind.push(C("Worlds  (each -X boss)"));
+  ind.push(KV("main_worlds_tuto",B(state.main_worlds_tuto),"bool"));
+  ind.push(KV("xtra_worlds",B(state.xtra_worlds),"bool"));
+  ind.push(KV("xtra_worlds_tuto",B(state.xtra_worlds_tuto),"bool"));
+  ind.push(KV("crown_worlds",B(state.crown_worlds),"bool"));
+  ind.push(KV("crown_worlds_tuto",B(state.crown_worlds_tuto),"bool"));
+  ind.push(KV("star_worlds",B(state.star_worlds),"bool"));
+  ind.push(KV("star_worlds_tuto",B(state.star_worlds_tuto),"bool"));
+  ind.push(KV("neon_cosmos_worlds",B(state.neon_cosmos_worlds),"bool"));
+  ind.push(KV("neon_cosmos_worlds_tuto",B(state.neon_cosmos_worlds_tuto),"bool"));
+  ind.push(KV("neon_cosmos_worlds_ex",B(state.neon_cosmos_worlds_ex),"bool"));
+  ind.push(KV("neon_cosmos_worlds_ex_tuto",B(state.neon_cosmos_worlds_ex_tuto),"bool"));
+  ind.push(KV("b_world",B(state.b_world),"bool"));
+  ind.push(KV("b_world_tuto",B(state.b_world_tuto),"bool"));
+  ind.push(KV("ar_world",B(state.ar_world),"bool"));
+  ind.push(KV("ar_world_tuto",B(state.ar_world_tuto),"bool"));
+  ind.push(KV("april_fools_worlds",B(state.april_fools_worlds),"bool"));
+  ind.push(C("Extras"));
+  ind.push(KV("death_link",B(state.death_link),"bool"));
+  return {lines,ind,name};
+}
+
+function tokenToPlain(t){
+  if(t.c!==undefined) return "# "+t.c;
+  if(t.raw!==undefined) return "A Dance of Fire and Ice:";
+  let v=t.v;
+  if(t.kind==="quoted") v='"'+v+'"';
+  return t.k+": "+v;
+}
+function tokenToHtml(t,indent){
+  const pad=indent?"  ":"";
+  if(t.c!==undefined) return pad+'<span class="yc"># '+esc(t.c)+'</span>';
+  if(t.raw!==undefined) return t.raw;
+  let vcls="yv", v=esc(String(t.v));
+  if(t.kind==="bool"){ vcls = t.v==="true"?"yv":"yc"; }
+  else if(t.kind==="num"){ vcls="yb"; }
+  else if(t.kind==="quoted"){ v='"'+v+'"'; }
+  return pad+'<span class="yk">'+esc(t.k)+'</span><span class="yc">:</span> <span class="'+vcls+'">'+v+'</span>';
+}
+
+function render(){
+  renderLevels();
+  document.getElementById("goalNote").innerHTML=goalNoteText();
+  document.getElementById("goalNote").className = (state.completion_goal==="goalLevels"&&state.goal_levels.size===0)?"note warn":"note";
+  const {lines,ind,name}=buildYamlLines();
+  const html=[...lines.map(t=>tokenToHtml(t,false)), ...ind.map(t=>tokenToHtml(t,true))].join("\n");
+  document.getElementById("yaml").innerHTML=html;
+  const fn=name+".yaml";
+  document.getElementById("yfile").textContent=fn;
+  document.getElementById("fileHint").textContent=fn;
+}
+
+function plainYaml(){
+  const {lines,ind}=buildYamlLines();
+  return [...lines.map(t=>tokenToPlain(t)), ...ind.map(t=>"  "+tokenToPlain(t))].join("\n")+"\n";
+}
+
+// name field
+const pn=document.getElementById("pname");
+pn.addEventListener("input",()=>{ state.name=pn.value.replace(/[^A-Za-z0-9_\-]/g,""); if(pn.value!==state.name) pn.value=state.name; render(); });
+
+// copy
+const copyBtn=document.getElementById("copyBtn");
+copyBtn.addEventListener("click",async()=>{
+  const text=plainYaml();
+  try{ await navigator.clipboard.writeText(text); done(); }
+  catch(e){
+    const ta=document.createElement("textarea"); ta.value=text; ta.style.position="fixed"; ta.style.opacity="0"; document.body.appendChild(ta); ta.select();
+    try{ document.execCommand("copy"); done(); }catch(_){ } document.body.removeChild(ta);
+  }
+});
+function done(){ copyBtn.textContent="Copied ✓"; copyBtn.classList.add("done"); setTimeout(()=>{copyBtn.textContent="Copy";copyBtn.classList.remove("done");},1600); }
+
+// download (works when the page is opened as a local file; the hosted preview sandbox blocks
+// downloads, so hide the button there and let Copy be the path instead)
+const dlBtn=document.getElementById("dlBtn");
+if(window.claude){ dlBtn.hidden=true; }
+dlBtn.addEventListener("click",()=>{
+  const {name}=buildYamlLines();
+  try{
+    const blob=new Blob([plainYaml()],{type:"text/yaml;charset=utf-8"});
+    const url=URL.createObjectURL(blob);
+    const a=document.createElement("a");
+    a.href=url; a.download=name+".yaml";
+    document.body.appendChild(a); a.click();
+    setTimeout(()=>{URL.revokeObjectURL(url); a.remove();},0);
+  }catch(e){ copyBtn.click(); }
+});
+
+// theme toggle
+const root=document.documentElement, tb=document.getElementById("themeBtn");
+try{ const saved=localStorage.getItem("adofai-theme"); if(saved) root.setAttribute("data-theme",saved); }catch(e){}
+tb.addEventListener("click",()=>{
+  const cur=root.getAttribute("data-theme");
+  const sysDark=matchMedia("(prefers-color-scheme:dark)").matches;
+  const next=(cur==="dark"||(!cur&&sysDark))?"light":"dark";
+  root.setAttribute("data-theme",next);
+  try{ localStorage.setItem("adofai-theme",next); }catch(e){}
+});
+
+render();
+</script>
+</body>
+</html>

@@ -315,3 +315,27 @@ ARWorldTutoKeys = {
     "Key_Level_AR-8": ItemData(54125625, "progression"),
 }
 
+# Cosmic Radio Island (CE / CI). Base-game extra worlds, no DLC required.
+CosmicRadioWorldsKeys = {
+    "Key_Level_CE-X": ItemData(54125626, "progression"),
+    "Key_Level_CI-X": ItemData(54125627, "progression"),
+}
+
+CosmicRadioWorldsTutoKeys = {
+    "Key_Level_CE-1": ItemData(54125628, "progression"),
+    "Key_Level_CE-2": ItemData(54125629, "progression"),
+    "Key_Level_CE-3": ItemData(54125630, "progression"),
+    "Key_Level_CE-4": ItemData(54125631, "progression"),
+    "Key_Level_CE-5": ItemData(54125632, "progression"),
+
+    "Key_Level_CI-1": ItemData(54125633, "progression"),
+    "Key_Level_CI-2": ItemData(54125634, "progression"),
+    "Key_Level_CI-3": ItemData(54125635, "progression"),
+}
+
+# Cosmic Radio EX (CE-TX, "Dramatic Entrance! Tech ver."). Kept as its own
+# category because of its extreme difficulty, so players can opt out of it.
+CosmicRadioWorldsEXKeys = {
+    "Key_Level_CE-TX": ItemData(54125636, "progression"),
+}
+

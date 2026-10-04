@@ -328,3 +328,26 @@ ARWorldTutoLoc = {
     "AR-8": LocData(98765643, "World AR"),
 }
 
+# Cosmic Radio Island (CE / CI). Base-game extra worlds, no DLC required.
+CosmicRadioWorldsLoc = {
+    "CE-X": LocData(98765644, "World CE"),
+    "CI-X": LocData(98765645, "World CI"),
+}
+
+CosmicRadioWorldsTutoLoc = {
+    "CE-1": LocData(98765646, "World CE"),
+    "CE-2": LocData(98765647, "World CE"),
+    "CE-3": LocData(98765648, "World CE"),
+    "CE-4": LocData(98765649, "World CE"),
+    "CE-5": LocData(98765650, "World CE"),
+
+    "CI-1": LocData(98765651, "World CI"),
+    "CI-2": LocData(98765652, "World CI"),
+    "CI-3": LocData(98765653, "World CI"),
+}
+
+# Cosmic Radio EX (CE-TX). Separate category due to its extreme difficulty.
+CosmicRadioWorldsEXLoc = {
+    "CE-TX": LocData(98765654, "World CETX"),
+}
+

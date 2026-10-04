@@ -279,6 +279,13 @@ const GROUPS = [
   {key:"ar", name:"AR World", world:"ar_world", tuto:"ar_world_tuto",
    desc:"The AR world.",
    bosses:["AR-X"], tutos:rng("AR",1,8)},
+  {key:"cosmic", name:"Cosmic Radio Worlds", world:"cosmic_radio_worlds", tuto:"cosmic_radio_worlds_tuto",
+   desc:"Cosmic Radio Island (CE, CI). Base-game extras, no DLC required.",
+   bosses:["CE-X","CI-X"],
+   tutos:[...rng("CE",1,5),...rng("CI",1,3)]},
+  {key:"cosmicex", name:"Cosmic Radio EX", world:"cosmic_radio_worlds_ex",
+   desc:"CE-TX (Dramatic Entrance! Tech ver.). Separate: one of the hardest official levels. No tutorials.",
+   bosses:["CE-TX"], tutos:[]},
   {key:"april", name:"April Fools Worlds", world:"april_fools_worlds",
    desc:"The joke worlds (1J-6J, BJ). No separate tutorials.",
    bosses:["1J-X","2J-X","3J-X","4J-X","5J-X","6J-X","BJ-X"], tutos:[]},
@@ -295,6 +302,8 @@ const state = {
   neon_cosmos_worlds_ex:false, neon_cosmos_worlds_ex_tuto:false,
   b_world:false, b_world_tuto:false,
   ar_world:false, ar_world_tuto:false,
+  cosmic_radio_worlds:false, cosmic_radio_worlds_tuto:false,
+  cosmic_radio_worlds_ex:false,
   april_fools_worlds:false,
   completion_goal:"allX",
   percentage_goal_completion:80,
@@ -449,6 +458,9 @@ function buildYamlLines(){
   ind.push(KV("b_world_tuto",B(state.b_world_tuto),"bool"));
   ind.push(KV("ar_world",B(state.ar_world),"bool"));
   ind.push(KV("ar_world_tuto",B(state.ar_world_tuto),"bool"));
+  ind.push(KV("cosmic_radio_worlds",B(state.cosmic_radio_worlds),"bool"));
+  ind.push(KV("cosmic_radio_worlds_tuto",B(state.cosmic_radio_worlds_tuto),"bool"));
+  ind.push(KV("cosmic_radio_worlds_ex",B(state.cosmic_radio_worlds_ex),"bool"));
   ind.push(KV("april_fools_worlds",B(state.april_fools_worlds),"bool"));
   ind.push(C("Extras"));
   ind.push(KV("death_link",B(state.death_link),"bool"));

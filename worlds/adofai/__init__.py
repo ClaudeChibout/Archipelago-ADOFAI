@@ -12,12 +12,14 @@ from .Items import BWorldKeys, BWorldTutoKeys, CrownWorldsKeys, CrownWorldsTutoK
 from .Items import NeonCosmosWorldsKeys, NeonCosmosWorldsTutoKeys, NeonCosmosWorldsEXKeys, NeonCosmosWorldsEXTutoKeys
 from .Items import AprilFoolsWorldsKeys
 from .Items import ARWorldKeys, ARWorldTutoKeys
+from .Items import CosmicRadioWorldsKeys, CosmicRadioWorldsTutoKeys, CosmicRadioWorldsEXKeys
 
 from .Locations import adofai_locations, MainWorldsLoc, MainWorldsTutoLoc, XtraWorldsLoc, XtraTutoLoc
 from .Locations import BWorldLoc, BWorldTutoLoc, CrownWorldsLoc, CrownWorldsTutoLoc, StarWorldsLoc, StarWorldsTutoLoc
 from .Locations import NeonCosmosWorldsLoc, NeonCosmosWorldsTutoLoc, NeonCosmosWorldsEXLoc, NeonCosmosWorldsEXTutoLoc
 from .Locations import AprilFoolsWorldsLoc
 from .Locations import ARWorldLoc, ARWorldTutoLoc
+from .Locations import CosmicRadioWorldsLoc, CosmicRadioWorldsTutoLoc, CosmicRadioWorldsEXLoc
 from .Options import ADOFAIOptions
 
 
@@ -26,6 +28,7 @@ all_items = all_items | OtherItems | BWorldKeys | BWorldTutoKeys | CrownWorldsKe
 all_items = all_items | StarWorldsKeys | StarWorldsTutoKeys | AprilFoolsWorldsKeys
 all_items = all_items | NeonCosmosWorldsKeys | NeonCosmosWorldsTutoKeys | NeonCosmosWorldsEXKeys | NeonCosmosWorldsEXTutoKeys
 all_items = all_items | ARWorldKeys | ARWorldTutoKeys
+all_items = all_items | CosmicRadioWorldsKeys | CosmicRadioWorldsTutoKeys | CosmicRadioWorldsEXKeys
 
 _item_name_to_id = {n: d.id for n, d in all_items.items()}
 
@@ -34,6 +37,7 @@ all_locs = all_locs | BWorldLoc | BWorldTutoLoc | CrownWorldsLoc | CrownWorldsTu
 all_locs = all_locs | StarWorldsLoc | StarWorldsTutoLoc | AprilFoolsWorldsLoc
 all_locs = all_locs | NeonCosmosWorldsLoc | NeonCosmosWorldsTutoLoc | NeonCosmosWorldsEXLoc | NeonCosmosWorldsEXTutoLoc
 all_locs = all_locs | ARWorldLoc | ARWorldTutoLoc
+all_locs = all_locs | CosmicRadioWorldsLoc | CosmicRadioWorldsTutoLoc | CosmicRadioWorldsEXLoc
 
 _location_name_to_id = {n: d.id for n, d in all_locs.items()}
 
@@ -146,6 +150,12 @@ class ADOFAIWorld(World):
             used_items.update(ARWorldKeys)
         if self.options.ar_world_tuto.value:
             used_items.update(ARWorldTutoKeys)
+        if self.options.cosmic_radio_worlds.value:
+            used_items.update(CosmicRadioWorldsKeys)
+        if self.options.cosmic_radio_worlds_tuto.value:
+            used_items.update(CosmicRadioWorldsTutoKeys)
+        if self.options.cosmic_radio_worlds_ex.value:
+            used_items.update(CosmicRadioWorldsEXKeys)
 
         for item_name in used_items.keys():
             self.multiworld.itempool.append(self.create_item(item_name))
@@ -202,7 +212,10 @@ class ADOFAIWorld(World):
             "neon_cosmos_worlds_ex_tuto": bool(self.options.neon_cosmos_worlds_ex_tuto.value),
             "april_fools_worlds": bool(self.options.april_fools_worlds.value),
             "ar_world":bool(self.options.ar_world.value),
-            "ar_world_tuto":bool(self.options.ar_world_tuto.value)
+            "ar_world_tuto":bool(self.options.ar_world_tuto.value),
+            "cosmic_radio_worlds":bool(self.options.cosmic_radio_worlds.value),
+            "cosmic_radio_worlds_tuto":bool(self.options.cosmic_radio_worlds_tuto.value),
+            "cosmic_radio_worlds_ex":bool(self.options.cosmic_radio_worlds_ex.value)
         }
     
     def get_used_locations(self):
@@ -241,6 +254,12 @@ class ADOFAIWorld(World):
             used_locs.update(ARWorldLoc)
         if self.options.ar_world_tuto.value:
             used_locs.update(ARWorldTutoLoc)
+        if self.options.cosmic_radio_worlds.value:
+            used_locs.update(CosmicRadioWorldsLoc)
+        if self.options.cosmic_radio_worlds_tuto.value:
+            used_locs.update(CosmicRadioWorldsTutoLoc)
+        if self.options.cosmic_radio_worlds_ex.value:
+            used_locs.update(CosmicRadioWorldsEXLoc)
         return used_locs
 
 

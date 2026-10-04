@@ -51,6 +51,15 @@ class ARWorld(Toggle):
 class ARWorldTuto(Toggle):
     display_name= "ARWorldTuto"
 
+class CosmicRadioWorlds(Toggle):
+    display_name= "CosmicRadioWorlds"
+
+class CosmicRadioWorldsTuto(Toggle):
+    display_name= "CosmicRadioWorldsTuto"
+
+class CosmicRadioWorldsEX(Toggle):
+    display_name= "CosmicRadioWorldsEX"
+
 class CompletionGoal(Choice):
     display_name = "CompletionGoal"
     option_allX = 0
@@ -86,6 +95,9 @@ class ADOFAIOptions(PerGameCommonOptions):
     april_fools_worlds: AprilFoolsWorlds
     ar_world: ARWorld
     ar_world_tuto: ARWorldTuto
+    cosmic_radio_worlds: CosmicRadioWorlds
+    cosmic_radio_worlds_tuto: CosmicRadioWorldsTuto
+    cosmic_radio_worlds_ex: CosmicRadioWorldsEX
     percentage_goal_completion: PercentageGoalCompletion
     completion_goal: CompletionGoal
     goal_levels: GoalLevels

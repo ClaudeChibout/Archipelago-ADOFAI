@@ -41,6 +41,9 @@ Configuration is done from the **player options page**:
 | **neon_cosmos_worlds_ex** | Adds “Neon Cosmos EX” worlds |
 | **neon_cosmos_worlds_ex_tuto** | Adds “Neon Cosmos EX” tutorials |
 | **april_fools_worlds** | Adds “April Fools” worlds |
+| **cosmic_radio_worlds** | Adds “Cosmic Radio” worlds (CE, CI) |
+| **cosmic_radio_worlds_tuto** | Adds tutorials for “Cosmic Radio” worlds |
+| **cosmic_radio_worlds_ex** | Adds the “Cosmic Radio EX” world (CE-TX, very hard) |
 | **death_link** | Enables DeathLink between players |
 
 ---

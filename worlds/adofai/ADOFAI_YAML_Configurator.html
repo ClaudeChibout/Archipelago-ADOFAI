@@ -108,7 +108,11 @@ input[type=range]{flex:1;min-width:0;accent-color:var(--accent);height:6px}
 .note.warn{border-left-color:var(--warn)}
 .note b{color:var(--fg)}
 
-.levels{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
+.levelswrap{display:flex;flex-direction:column;gap:8px;margin-top:4px;max-height:300px;overflow:auto;
+  border:1px solid var(--border);border-radius:10px;padding:10px;background:var(--surface-2)}
+.lvlgroup{font-family:var(--font-display);font-size:.78rem;font-weight:600;letter-spacing:.3px;color:var(--ice);text-transform:uppercase;margin-top:4px}
+.lvlgroup:first-child{margin-top:0}
+.levels{display:flex;flex-wrap:wrap;gap:8px;margin-top:2px}
 .lvl{font-family:var(--font-mono);font-size:.82rem;font-weight:600;border:1px solid var(--border-strong);background:var(--surface-2);
   color:var(--muted);border-radius:8px;padding:6px 10px;cursor:pointer}
 .lvl[aria-pressed=true]{color:var(--bg);background:var(--accent);border-color:var(--accent)}
@@ -193,8 +197,8 @@ a{color:var(--ice)}
         </div>
 
         <div id="goalPick" hidden>
-          <label class="field">Goal levels <span style="text-transform:none;font-weight:500">(click to select)</span></label>
-          <div class="levels" id="levels"></div>
+          <label class="field">Goal levels <span style="text-transform:none;font-weight:500">(click any level: bosses, and tutorials where enabled)</span></label>
+          <div class="levelswrap" id="levels"></div>
         </div>
         <p class="note" id="goalNote"></p>
       </section>
@@ -237,34 +241,47 @@ a{color:var(--ice)}
 
 <script>
 "use strict";
+// range helper: rng("7",1,5) -> ["7-1","7-2","7-3","7-4","7-5"]
+function rng(prefix,a,b){ const o=[]; for(let i=a;i<=b;i++) o.push(prefix+"-"+i); return o; }
+
 const GROUPS = [
   {key:"main", name:"Main Worlds", always:true, tuto:"main_worlds_tuto",
    desc:"Worlds 1-12, the base campaign. Always included.",
-   bosses:["1-X","2-X","3-X","4-X","5-X","6-X","7-X","8-X","9-X","10-X","11-X","12-X"]},
+   bosses:["1-X","2-X","3-X","4-X","5-X","6-X","7-X","8-X","9-X","10-X","11-X","12-X"],
+   // World 1 tutorials are always available; the rest come with main_worlds_tuto.
+   baseTutos:rng("1",1,6),
+   tutos:[...rng("2",1,3),...rng("3",1,6),...rng("4",1,5),...rng("5",1,4),...rng("6",1,4),
+          ...rng("7",1,5),...rng("8",1,8),...rng("9",1,5),...rng("10",1,8),...rng("11",1,6),...rng("12",1,6)]},
   {key:"xtra", name:"Xtra Worlds", world:"xtra_worlds", tuto:"xtra_worlds_tuto",
    desc:"The extra/bonus worlds past the main campaign.",
-   bosses:["XS-X","PA-X","XH-X","XC-X","XF-X","XR-X","RJ-X","XN-X","XM-X"]},
+   bosses:["XS-X","PA-X","XH-X","XC-X","XF-X","XR-X","RJ-X","XN-X","XM-X"],
+   tutos:[...rng("XS",1,8),...rng("PA",1,1),...rng("XH",1,3),...rng("XC",1,5),...rng("XF",1,3),
+          ...rng("XR",1,3),...rng("RJ",1,7),...rng("XN",1,3),...rng("XM",1,4)]},
   {key:"crown", name:"Crown Worlds", world:"crown_worlds", tuto:"crown_worlds_tuto",
    desc:"The Crown set (XO, XT, XI).",
-   bosses:["XO-X","XT-X","XI-X"]},
+   bosses:["XO-X","XT-X","XI-X"],
+   tutos:[...rng("XO",1,2),...rng("XT",1,8),...rng("XI",1,7)]},
   {key:"star", name:"Star Worlds", world:"star_worlds", tuto:"star_worlds_tuto",
    desc:"The Star set (MN, ML, MO).",
-   bosses:["MN-X","ML-X","MO-X"]},
+   bosses:["MN-X","ML-X","MO-X"],
+   tutos:[...rng("MN",1,4),...rng("ML",1,7),...rng("MO",1,3)]},
   {key:"neon", name:"Neon Cosmos", world:"neon_cosmos_worlds", tuto:"neon_cosmos_worlds_tuto",
    desc:"The Neo Cosmos worlds (T1-T5).",
-   bosses:["T1-X","T2-X","T3-X","T4-X","T5-X"]},
+   bosses:["T1-X","T2-X","T3-X","T4-X","T5-X"],
+   tutos:[...rng("T1",1,4),...rng("T2",1,9),...rng("T3",1,1),...rng("T4",1,12),...rng("T5",1,5)]},
   {key:"neonex", name:"Neon Cosmos EX", world:"neon_cosmos_worlds_ex", tuto:"neon_cosmos_worlds_ex_tuto",
    desc:"The harder EX variants of the Neo Cosmos worlds.",
-   bosses:["T1EX-X","T2EX-X","T3EX-X","T4EX-X"]},
+   bosses:["T1EX-X","T2EX-X","T3EX-X","T4EX-X"],
+   tutos:[...rng("T1EX",1,4),...rng("T2EX",1,4),...rng("T4EX",1,4)]},
   {key:"b", name:"B World", world:"b_world", tuto:"b_world_tuto",
    desc:"The single B world.",
-   bosses:["B-X"]},
+   bosses:["B-X"], tutos:["B-1"]},
   {key:"ar", name:"AR World", world:"ar_world", tuto:"ar_world_tuto",
    desc:"The AR world.",
-   bosses:["AR-X"]},
+   bosses:["AR-X"], tutos:rng("AR",1,8)},
   {key:"april", name:"April Fools Worlds", world:"april_fools_worlds",
    desc:"The joke worlds (1J-6J, BJ). No separate tutorials.",
-   bosses:["1J-X","2J-X","3J-X","4J-X","5J-X","6J-X","BJ-X"]},
+   bosses:["1J-X","2J-X","3J-X","4J-X","5J-X","6J-X","BJ-X"], tutos:[]},
 ];
 
 const state = {
@@ -318,7 +335,7 @@ function syncSwitch(b,optKey){ b.setAttribute("aria-pressed", state[optKey]?"tru
 
 // deathlink switch
 const dl = document.getElementById("deathlink");
-dl.addEventListener("click",()=>{ state.death_link=!state.death_link; dl.setAttribute("aria-pressed",state.death_link?"true":"false"); dl.querySelector(".lbl").textContent=state.death_link?"On":"Off"; render(); });
+dl.addEventListener("click",()=>{ state.death_link=!state.death_link; dl.setAttribute("aria-pressed",state.death_link?"true":"false"); dl.querySelector(".lbl").textContent=state.death_link?"On":"Off"; renderYaml(); });
 
 // ---- goal modes ----
 document.querySelectorAll("#goalModes .radio").forEach(r=>{
@@ -334,34 +351,60 @@ document.querySelectorAll("#goalModes .radio").forEach(r=>{
 
 // ---- percentage ----
 const pct=document.getElementById("pct");
-pct.addEventListener("input",()=>{ state.percentage_goal_completion=+pct.value; document.getElementById("pctVal").textContent=pct.value+"%"; render(); });
+pct.addEventListener("input",()=>{ state.percentage_goal_completion=+pct.value; document.getElementById("pctVal").textContent=pct.value+"%"; renderYaml(); });
 
-// ---- which bosses are currently available (for the goal picker) ----
-function availableBosses(){
-  const out=[];
-  GROUPS.forEach(g=>{ if(g.always || state[g.world]) out.push(...g.bosses); });
-  return out;
+// ---- which levels are currently available as goals (boss -X plus enabled tutorials) ----
+function sortLevels(arr,g){
+  const rank={}; g.bosses.forEach((b,i)=>{ rank[b.slice(0,b.lastIndexOf("-"))]=i; });
+  const num=s=> s==="X"?1e9:parseInt(s,10);
+  return arr.slice().sort((a,b)=>{
+    const pa=a.slice(0,a.lastIndexOf("-")), pb=b.slice(0,b.lastIndexOf("-"));
+    const ra=(pa in rank)?rank[pa]:999, rb=(pb in rank)?rank[pb]:999;
+    if(ra!==rb) return ra-rb;
+    return num(a.slice(a.lastIndexOf("-")+1)) - num(b.slice(b.lastIndexOf("-")+1));
+  });
+}
+function groupLevels(g){
+  const lv=[];
+  if(g.always || state[g.world]) lv.push(...g.bosses);   // boss -X levels
+  if(g.baseTutos) lv.push(...g.baseTutos);               // World 1 tutorials, always available
+  if(g.tuto && state[g.tuto]) lv.push(...(g.tutos||[]));  // this world's tutorials, when enabled
+  return sortLevels(lv,g);
+}
+function availableLevels(){
+  const s=new Set();
+  GROUPS.forEach(g=>groupLevels(g).forEach(l=>s.add(l)));
+  return s;
 }
 function afterWorldChange(){
   // drop goal levels that are no longer available
-  const avail=new Set(availableBosses());
+  const avail=availableLevels();
   [...state.goal_levels].forEach(l=>{ if(!avail.has(l)) state.goal_levels.delete(l); });
   render();
 }
 
-// ---- render goal picker + yaml ----
+// ---- render goal picker (grouped by world) + yaml ----
 const levelsEl=document.getElementById("levels");
 function renderLevels(){
-  const bosses=availableBosses();
   levelsEl.innerHTML="";
-  if(!bosses.length){ const e=document.createElement("span"); e.className="empty"; e.textContent="Enable a world first."; levelsEl.appendChild(e); return; }
-  bosses.forEach(l=>{
-    const b=document.createElement("button");
-    b.type="button"; b.className="lvl"; b.textContent=l;
-    b.setAttribute("aria-pressed", state.goal_levels.has(l)?"true":"false");
-    b.addEventListener("click",()=>{ state.goal_levels.has(l)?state.goal_levels.delete(l):state.goal_levels.add(l); b.setAttribute("aria-pressed",state.goal_levels.has(l)?"true":"false"); render(); });
-    levelsEl.appendChild(b);
+  let any=false;
+  GROUPS.forEach(g=>{
+    const lv=groupLevels(g);
+    if(!lv.length) return;
+    any=true;
+    const head=document.createElement("div"); head.className="lvlgroup"; head.textContent=g.name;
+    levelsEl.appendChild(head);
+    const row=document.createElement("div"); row.className="levels";
+    lv.forEach(l=>{
+      const b=document.createElement("button");
+      b.type="button"; b.className="lvl"; b.textContent=l;
+      b.setAttribute("aria-pressed", state.goal_levels.has(l)?"true":"false");
+      b.addEventListener("click",()=>{ state.goal_levels.has(l)?state.goal_levels.delete(l):state.goal_levels.add(l); b.setAttribute("aria-pressed",state.goal_levels.has(l)?"true":"false"); renderYaml(); });
+      row.appendChild(b);
+    });
+    levelsEl.appendChild(row);
   });
+  if(!any){ const e=document.createElement("span"); e.className="empty"; e.textContent="Enable a world first."; levelsEl.appendChild(e); }
 }
 
 function goalNoteText(){
@@ -430,8 +473,9 @@ function tokenToHtml(t,indent){
   return pad+'<span class="yk">'+esc(t.k)+'</span><span class="yc">:</span> <span class="'+vcls+'">'+v+'</span>';
 }
 
-function render(){
-  renderLevels();
+// Update the note + YAML output only (leaves the level grid untouched, so clicking a
+// chip keeps the scroll position).
+function renderYaml(){
   document.getElementById("goalNote").innerHTML=goalNoteText();
   document.getElementById("goalNote").className = (state.completion_goal==="goalLevels"&&state.goal_levels.size===0)?"note warn":"note";
   const {lines,ind,name}=buildYamlLines();
@@ -441,6 +485,11 @@ function render(){
   document.getElementById("yfile").textContent=fn;
   document.getElementById("fileHint").textContent=fn;
 }
+// Full render: rebuild the level grid (only needed when worlds/mode change) then the YAML.
+function render(){
+  if(state.completion_goal==="goalLevels") renderLevels();
+  renderYaml();
+}
 
 function plainYaml(){
   const {lines,ind}=buildYamlLines();
@@ -449,7 +498,7 @@ function plainYaml(){
 
 // name field
 const pn=document.getElementById("pname");
-pn.addEventListener("input",()=>{ state.name=pn.value.replace(/[^A-Za-z0-9_\-]/g,""); if(pn.value!==state.name) pn.value=state.name; render(); });
+pn.addEventListener("input",()=>{ state.name=pn.value.replace(/[^A-Za-z0-9_\-]/g,""); if(pn.value!==state.name) pn.value=state.name; renderYaml(); });
 
 // copy
 const copyBtn=document.getElementById("copyBtn");
